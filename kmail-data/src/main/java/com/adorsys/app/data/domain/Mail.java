@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -17,9 +18,11 @@ public class Mail extends AbstractPersistable<Long> implements MailModelRepresen
 	 * 
 	 */
 	private static final long serialVersionUID = -1888321880636524044L;
-
+	
+	@ElementCollection
 	private List<String> addressFrom  = new ArrayList<String>();
 	
+	@ElementCollection
 	private List<String> addressTo = new ArrayList<String>();
 	
 	private String subject ;
@@ -66,6 +69,14 @@ public class Mail extends AbstractPersistable<Long> implements MailModelRepresen
 
 	public void setContentType(String contentType) {
 		this.contentType = contentType;
+	}
+
+	@Override
+	public String toString() {
+		return "Mail [addressFrom=" + addressFrom + ", addressTo=" + addressTo
+				+ ", subject=" + subject + ", sendDate=" + sendDate
+				+ ", contentType=" + contentType + ", Id=" + getId()
+				+ ", New=" + isNew() + "]";
 	}
 	
 }

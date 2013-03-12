@@ -67,5 +67,12 @@ public class MailAccount extends AbstractPersistable<Long> implements MailAccoun
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	@Override
+	public String toString() {
+		return "MailAccount [protocol=" + protocol + ", url=" + url + ", port="
+				+ port + ", userName=" + userName + ", password=" + password
+				+ ", Id=" + getId() + ", isNew=" + isNew() + "]";
+	}
 	
 }

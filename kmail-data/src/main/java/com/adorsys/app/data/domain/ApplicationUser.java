@@ -50,6 +50,12 @@ public class ApplicationUser extends AbstractPersistable<Long> implements Applic
 	public void setDefaultUser(boolean defaultUser) {
 		this.defaultUser = defaultUser;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "ApplicationUser [userName=" + userName + ", password="
+				+ password + ", defaultUser=" + defaultUser + ", Id="
+				+ getId() + ", isNew=" + isNew() + "]";
+	}
+	
 }

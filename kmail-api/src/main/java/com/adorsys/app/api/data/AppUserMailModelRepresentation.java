@@ -10,7 +10,7 @@ import java.util.Date;
  * 
  * List of user's mails associated to his account.
  */
-public interface AppUserMailsModelRepresentation {
+public interface AppUserMailModelRepresentation {
 	public MailAccountModelRepresentation getMailAccount();
 	
 	public void setMailAccount(MailAccountModelRepresentation mailAccount);

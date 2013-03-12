@@ -22,9 +22,9 @@ public class AppUserMailAccount extends AbstractPersistable<Long> implements App
 	
 	private static final long serialVersionUID = 7517136670448466409L;
 
-	private ApplicationUserModelRepresentation applicationUser ;
+	private ApplicationUser applicationUser ;
 	
-	private MailAccountModelRepresentation mailAccount;
+	private MailAccount mailAccount;
 	
 	private boolean active ;
 	
@@ -36,7 +36,7 @@ public class AppUserMailAccount extends AbstractPersistable<Long> implements App
 
 	public void setApplicationUser(
 			ApplicationUserModelRepresentation applicationUser) {
-		this.applicationUser = applicationUser;
+		this.applicationUser = (ApplicationUser) applicationUser;
 	}
 
 	public MailAccountModelRepresentation getMailAccount() {
@@ -44,7 +44,7 @@ public class AppUserMailAccount extends AbstractPersistable<Long> implements App
 	}
 
 	public void setMailAccount(MailAccountModelRepresentation mailAccount) {
-		this.mailAccount = mailAccount;
+		this.mailAccount = (MailAccount) mailAccount;
 	}
 
 	public boolean isActive() {
@@ -62,5 +62,14 @@ public class AppUserMailAccount extends AbstractPersistable<Long> implements App
 	public void setDateOfCreation(Date dateOfCreation) {
 		this.dateOfCreation = dateOfCreation;
 	}
+
+	@Override
+	public String toString() {
+		return "AppUserMailAccount [applicationUser=" + applicationUser
+				+ ", mailAccount=" + mailAccount + ", active=" + active
+				+ ", dateOfCreation=" + dateOfCreation + ", Id=" + getId()
+				+ ", isNew=" + isNew() + "]";
+	}
+	
 	
 }

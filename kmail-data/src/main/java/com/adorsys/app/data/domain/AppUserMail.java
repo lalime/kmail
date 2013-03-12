@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import com.adorsys.app.api.data.AppUserMailsModelRepresentation;
+import com.adorsys.app.api.data.AppUserMailModelRepresentation;
 import com.adorsys.app.api.data.ApplicationUserModelRepresentation;
 import com.adorsys.app.api.data.MailAccountModelRepresentation;
 import com.adorsys.app.api.data.MailModelRepresentation;
@@ -19,18 +19,18 @@ import com.adorsys.app.api.data.MailModelRepresentation;
  *
  */
 @Entity
-public class AppUserMail extends AbstractPersistable<Long> implements AppUserMailsModelRepresentation{
+public class AppUserMail extends AbstractPersistable<Long> implements AppUserMailModelRepresentation{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2487525761297456275L;
-
-	private MailAccountModelRepresentation mailAccount ;
 	
-	private ApplicationUserModelRepresentation applicationUser ;
+	private MailAccount mailAccount ;
 	
-	private MailModelRepresentation mail ;
+	private ApplicationUser applicationUser ;
+	
+	private Mail mail ;
 	
 	private Date receptionDate;
 	
@@ -45,7 +45,7 @@ public class AppUserMail extends AbstractPersistable<Long> implements AppUserMai
 	}
 
 	public void setMailAccount(MailAccountModelRepresentation mailAccount) {
-		this.mailAccount = mailAccount;
+		this.mailAccount = (MailAccount) mailAccount;
 	}
 
 	public ApplicationUserModelRepresentation getApplicationUser() {
@@ -54,7 +54,7 @@ public class AppUserMail extends AbstractPersistable<Long> implements AppUserMai
 
 	public void setApplicationUser(
 			ApplicationUserModelRepresentation applicationUser) {
-		this.applicationUser = applicationUser;
+		this.applicationUser = (ApplicationUser) applicationUser;
 	}
 
 	public MailModelRepresentation getMail() {
@@ -62,7 +62,7 @@ public class AppUserMail extends AbstractPersistable<Long> implements AppUserMai
 	}
 
 	public void setMail(MailModelRepresentation mail) {
-		this.mail = mail;
+		this.mail = (Mail) mail;
 	}
 
 	public Date getReceptionDate() {
@@ -95,6 +95,15 @@ public class AppUserMail extends AbstractPersistable<Long> implements AppUserMai
 
 	public void setInTrash(boolean inTrash) {
 		this.inTrash = inTrash;
+	}
+
+	@Override
+	public String toString() {
+		return "AppUserMail [mailAccount=" + mailAccount + ", applicationUser="
+				+ applicationUser + ", mail=" + mail + ", receptionDate="
+				+ receptionDate + ", receptionTime=" + receptionTime
+				+ ", readed=" + readed + ", inTrash=" + inTrash + ", Id="
+				+ getId() + ", New=" + isNew() + "]";
 	}
 	
 }
