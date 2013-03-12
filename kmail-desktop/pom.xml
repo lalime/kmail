@@ -90,7 +90,24 @@
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
         </dependency>
-
+        
+        <!-- Kmail -->
+	        
+	    <dependency>
+	      <groupId>com.adorsys.app.api</groupId>
+	      <artifactId>kmail-api</artifactId>
+	    </dependency>
+	    
+	    <dependency>
+	      <groupId>com.adorsys.app.data</groupId>
+	      <artifactId>kmail-data</artifactId>
+	    </dependency>
+	    
+	    <dependency>
+	      <groupId>com.adorsys.app.service</groupId>
+	      <artifactId>kmail-service</artifactId>
+	    </dependency>
+	    
     </dependencies>
 
 </project>
