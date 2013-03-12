@@ -14,11 +14,8 @@
 	<properties>
 		<spring.version>3.2.0.RELEASE</spring.version>
 		<jpa.version>2.0.0</jpa.version>
-		<junit.version>4.11</junit.version>
 		<hibernate.version>4.1.4.Final</hibernate.version>
-		<slf4j.version>1.6.6</slf4j.version>
 		<aspectj.version>1.6.12</aspectj.version>
-		<jodatime.version>2.1</jodatime.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -64,8 +61,6 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
@@ -101,8 +96,6 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-			<version>${slf4j.version}</version>
-			<scope>runtime</scope>
 		</dependency>
 
 		<!-- HSQL -->
@@ -116,7 +109,6 @@
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-			<version>${jodatime.version}</version>
 		</dependency>
 
 		<dependency>
