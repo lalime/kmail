@@ -5,6 +5,11 @@ package com.adorsys.app.service;
 
 import java.util.List;
 
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
+
+import com.adorsys.app.api.data.MailAccountModelRepresentation;
 import com.adorsys.app.api.data.MailModelRepresentation;
 import com.adorsys.app.api.service.MailSender;
 
@@ -13,7 +18,14 @@ import com.adorsys.app.api.service.MailSender;
  *
  */
 public class SimpleMailSender implements MailSender {
-
+	
+	private MailAccountModelRepresentation mailAccount ;
+	
+	public SimpleMailSender(MailAccountModelRepresentation mailAccount) {
+		super();
+		this.mailAccount = mailAccount;
+	}
+	
 	@Override
 	public void sendMails(List<MailModelRepresentation> mails) {
 		if(mails == null || mails.isEmpty())
@@ -22,8 +34,21 @@ public class SimpleMailSender implements MailSender {
 			sendMail(mailModelRepresentation);
 		}
 	}
-	
-	private void sendMail(MailModelRepresentation mail){
+	@Override
+	public void sendMail(MailModelRepresentation mail){
+		SimpleEmail simpleEmail = new SimpleEmail();
+		try {
+			simpleEmail.setHostName(this.mailAccount.getHostName());
+			simpleEmail.setSmtpPort(new Integer(this.mailAccount.getPort()));
+			simpleEmail.setAuthenticator(new DefaultAuthenticator(this.mailAccount.getUserName(), this.mailAccount.getPassword()));
+			simpleEmail.setFrom(mail.getAddressFrom().iterator().next());
+			simpleEmail.setTo(mail.getAddressTo());
+			simpleEmail.setSubject(mail.getSubject());
+			simpleEmail.setMsg(mail.getBody());
+			simpleEmail.send();
+		} catch (EmailException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

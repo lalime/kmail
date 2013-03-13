@@ -9,18 +9,46 @@
   </parent>
   <groupId>com.adorsys.app.service</groupId>
   <artifactId>kmail-service</artifactId>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>commons-email</groupId>
+        <artifactId>commons-email</artifactId>
+        <version>1.1</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>com.adorsys.app.api</groupId>
+      <artifactId>kmail-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>javax.mail</groupId>
+      <artifactId>mail</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.quartz-scheduler</groupId>
+      <artifactId>quartz</artifactId>
+      <version>2.1.6</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.2</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>commons-email</groupId>
+      <artifactId>commons-email</artifactId>
+    </dependency>
+  </dependencies>
   <repositories>
     <repository>
       <id>JBOSS_NEXUS</id>
       <url>http://repository.jboss.org/nexus/content/groups/public</url>
     </repository>
   </repositories>
-   <dependencies>
-    <dependency>
-      <groupId>com.adorsys.app.api</groupId>
-      <artifactId>kmail-api</artifactId>
-    </dependency>
-  </dependencies>
   <build>
     <finalName>kmail-service</finalName>
     <plugins>

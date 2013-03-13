@@ -1,28 +1,15 @@
-package com.adorsys.app.data.domain;
+package com.adorsys.app.service.bean;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 import com.adorsys.app.api.data.MailModelRepresentation;
 
-@Entity
-public class Mail extends AbstractPersistable<Long> implements MailModelRepresentation{
+public class SimpleMailBean implements MailModelRepresentation{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -1888321880636524044L;
-	
-	@ElementCollection
 	private List<String> addressFrom  = new ArrayList<String>();
 	
-	@ElementCollection
 	private List<String> addressTo = new ArrayList<String>();
 	
 	private String subject ;
@@ -77,18 +64,15 @@ public class Mail extends AbstractPersistable<Long> implements MailModelRepresen
 	public String toString() {
 		return "Mail [addressFrom=" + addressFrom + ", addressTo=" + addressTo
 				+ ", subject=" + subject + ", sendDate=" + sendDate
-				+ ", contentType=" + contentType + ", Id=" + getId()
-				+ ", New=" + isNew() + "]";
+				+ ", contentType=" + contentType ;
 	}
 
-	@Override
 	public String getBody() {
 		return body;
 	}
 
-	@Override
 	public void setBody(String body) {
-		this.body = body;
+		this.body = body ;
 	}
 	
 }

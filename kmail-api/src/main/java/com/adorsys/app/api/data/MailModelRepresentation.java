@@ -32,4 +32,8 @@ public interface MailModelRepresentation {
 	
 	public void setContentType(String contentType);
 	
+	public String getBody();
+	
+	public void setBody(String body);
+	
 }

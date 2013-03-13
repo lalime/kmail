@@ -13,9 +13,9 @@ public interface MailAccountModelRepresentation {
 	
 	public void setProtocol(String protocol);
 	
-	public String getUrl();
+	public String getHostName();
 	
-	public void setUrl(String url);
+	public void setHostName(String hostName);
 
 	public String getPort() ;
 	

@@ -36,11 +36,11 @@ public class MailAccount extends AbstractPersistable<Long> implements MailAccoun
 		this.protocol = protocol;
 	}
 
-	public String getUrl() {
+	public String getHostName() {
 		return url;
 	}
 
-	public void setUrl(String url) {
+	public void setHostName(String url) {
 		this.url = url;
 	}
 

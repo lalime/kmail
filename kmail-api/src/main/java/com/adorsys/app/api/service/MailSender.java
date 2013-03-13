@@ -13,4 +13,6 @@ import com.adorsys.app.api.data.MailModelRepresentation;
  */
 public interface MailSender {
 	public void sendMails(List<MailModelRepresentation> mails);
+	
+	public void sendMail(MailModelRepresentation mail);
 }
