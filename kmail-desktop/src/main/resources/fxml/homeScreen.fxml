@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<fx:root type="javafx.scene.layout.VBox" alignment="TOP_LEFT" disable="false" fillWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="800.0" rotate="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adorsys.app.desktop.controller.HomeScreenController">
+  <children>
+    <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="File" fx:id="menuFIle">
+          <items>
+            <MenuItem mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" text="Open…" />
+            <Menu mnemonicParsing="false" text="Open Recent" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Close" />
+            <MenuItem mnemonicParsing="false" text="Save" />
+            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem mnemonicParsing="false" text="Revert" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Preferences…" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Quit" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Edit" fx:id="menuEdit">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Undo" />
+            <MenuItem mnemonicParsing="false" text="Redo" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Cut" />
+            <MenuItem mnemonicParsing="false" text="Copy" />
+            <MenuItem mnemonicParsing="false" text="Paste" />
+            <MenuItem mnemonicParsing="false" text="Delete" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="Select All" />
+            <MenuItem mnemonicParsing="false" text="Unselect All" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help" fx:id="menuHelp">
+          <items>
+            <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+      <children>
+        <TextField fx:id="searchField" layoutX="438.0" layoutY="14.0" maxHeight="-1.0" maxWidth="1.7976931348623157E308" onKeyPressed="#onSearchFieldKeyPressed" onKeyReleased="#onSearchFieldKeyReleased" prefWidth="331.0">
+          <effect>
+            <DropShadow offsetX="5.0" offsetY="5.0">
+              <color>
+                <Color blue="0.392" green="0.392" red="0.392" fx:id="x1" />
+              </color>
+            </DropShadow>
+          </effect>
+          <tooltip>
+            <Tooltip text="edit to search mails ..." />
+          </tooltip>
+        </TextField>
+        <BorderPane layoutX="14.0" layoutY="44.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="332.0" prefWidth="786.0">
+          <center>
+            <TabPane fx:id="mainTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="594.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="mailListTab" onClosed="#onMailListTabClosed" onSelectionChanged="#onMailListTabSelectionChanged" text="Untitled Tab 1">
+                  <content>
+                    <AnchorPane id="Content" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <children>
+                        <TableView fx:id="mailListTableView" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="true" prefHeight="238.0" prefWidth="526.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="88.0" text="From" />
+                            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="391.0" text="Subject" />
+                            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="113.0" text="Date" />
+                          </columns>
+                        </TableView>
+                        <Text id="tryItText" fx:id="justTryItText" layoutX="357.0" layoutY="254.0" scaleX="1.9850255819905325" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Just try It ..." />
+                      </children>
+                    </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+          </center>
+          <left>
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="151.0" prefHeight="274.0" prefWidth="192.0">
+              <children>
+                <Label fx:id="receivedMailLabel" onMouseClicked="#onReceivedLabelMailClicked" onMouseEntered="#onMouseEnteredMailLabel" onMouseExited="#onMouseExitedMailLabel" prefWidth="137.0" text="Received Mails" textOverrun="CLIP" />
+                <Separator prefWidth="200.0" />
+                <Label fx:id="sendedMailLabel" onMouseClicked="#onSendedMailLabelClicked" onMouseEntered="#onMouseEnteredMailLabel" onMouseExited="#onMouseExitedMailLabel" prefWidth="137.0" text="Sended Mails" />
+                <Separator prefWidth="200.0" />
+                <Label fx:id="trashLabel" onMouseClicked="#onTrashedMailLabelClicked" onMouseEntered="#onMouseEnteredMailLabel" onMouseExited="#onMouseExitedMailLabel" prefWidth="130.0" text="Trash" />
+                <Separator prefWidth="200.0" />
+                <Ellipse fx:id="ellipse" blendMode="HARD_LIGHT" fill="DODGERBLUE" radiusX="89.0" radiusY="63.5" stroke="BLACK" strokeType="INSIDE">
+                  <VBox.margin>
+                    <Insets top="60.0" />
+                  </VBox.margin>
+                </Ellipse>
+              </children>
+            </VBox>
+          </left>
+          <top>
+            <ToolBar focusTraversable="true" prefWidth="624.0">
+              <items>
+                <Button fx:id="newMailBtn" mnemonicParsing="false" text="New Mail" />
+                <ComboBox fx:id="actionComboBox" promptText="Actions">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList">
+                      <String fx:value="Actions..." />
+                      <String fx:value="Item 1" />
+                      <String fx:value="Item 2" />
+                      <String fx:value="Item 3" />
+                    </FXCollections>
+                  </items>
+                </ComboBox>
+              </items>
+            </ToolBar>
+          </top>
+        </BorderPane>
+        <Text fx:id="kmailText" layoutX="124.0" layoutY="30.0" rotate="180.0" scaleX="6.850459561193783" scaleY="1.453794527620031" strokeType="OUTSIDE" strokeWidth="0.0" text="kmail">
+          <effect>
+            <DropShadow color="$x1" offsetX="5.0" offsetY="5.0" />
+          </effect>
+        </Text>
+      </children>
+    </AnchorPane>
+  </children>
+  <effect>
+    <DisplacementMap>
+      <mapData>
+        <FloatMap />
+      </mapData>
+    </DisplacementMap>
+  </effect>
+</fx:root>

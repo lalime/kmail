@@ -1,24 +1,29 @@
-package com.adorsys.app.desktop;
+package com.adorsys.app.desktop.controller;
+
+import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class HelloController
-{
-    private static final Logger log = LoggerFactory.getLogger(HelloController.class);
+import com.adorsys.app.desktop.ViewManager;
 
-    @FXML private TextField firstNameField;
-    @FXML private TextField lastNameField;
+public class LoginScreenController
+{
+    private static final Logger log = LoggerFactory.getLogger(LoginScreenController.class);
+
+    @FXML private TextField userNameField;
+    @FXML private TextField passwordField;
     @FXML private Label messageLabel;
 
-    public void sayHello() {
+    public void onLogin() {
 
-        String firstName = firstNameField.getText();
-        String lastName = lastNameField.getText();
+        String firstName = userNameField.getText();
+        String lastName = passwordField.getText();
 
         StringBuilder builder = new StringBuilder();
 
@@ -34,9 +39,12 @@ public class HelloController
         }
 
         if (builder.length() > 0) {
-            String name = builder.toString();
-            log.debug("Saying hello to " + name);
-            messageLabel.setText("Hello " + name);
+            try {
+				ViewManager.getViewManager().showHomepage();
+			} catch (IOException e) {
+				e.printStackTrace();
+				log.error(e.getMessage(), e);
+			}
         } else {
             log.debug("Neither first name nor last name was set, saying hello to anonymous person");
             messageLabel.setText("Hello mysterious person");

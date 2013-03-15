@@ -6,17 +6,17 @@
 <?import org.tbee.javafx.scene.layout.fxml.MigPane?>
 <?import layouttests.migfxml.sample1.*?>
 
-<MigPane id="rootPane" fx:controller="com.adorsys.app.desktop.HelloController"
+<MigPane id="rootPane" fx:controller="com.adorsys.app.desktop.controller.LoginScreenController"
         styleClass="main-panel"
         layout="insets 20"
         cols="[label, pref!][grow, 50::]"
         rows=""
         xmlns:fx="http://javafx.com/fxml">
 
-    <Label text="First Name:" /> <TextField fx:id="firstNameField" prefColumnCount="30" MigPane.cc="growx, wrap" />
-    <Label text="Last Name:" />	<TextField fx:id="lastNameField" prefColumnCount="30" MigPane.cc="growx, wrap" />
+    <Label text="User Name:" /> <TextField fx:id="userNameField" prefColumnCount="30" MigPane.cc="growx, wrap" />
+    <Label text="Password:" />	<PasswordField fx:id="passwordField" prefColumnCount="30" MigPane.cc="growx, wrap" />
 
-    <Button text="Say Hello" onAction="#sayHello" MigPane.cc="skip, gap :push, gaptop 15, wrap" />
+    <Button text="Say Hello" onAction="#onLogin" MigPane.cc="skip, gap :push, gaptop 15, wrap" />
 
     <Label fx:id="messageLabel" styleClass="hello-message" MigPane.cc="span, growx, gaptop 15" />
 

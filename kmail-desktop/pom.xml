@@ -1,113 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-    <artifactId>kmail</artifactId>
-    <groupId>com.adorsys.app</groupId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
+	<parent>
+		<artifactId>kmail</artifactId>
+		<groupId>com.adorsys.app</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
 
-    <groupId>com.adorsys.app.desktop</groupId>
-    <artifactId>kmail-desktop</artifactId>
-    <name>kmail-desktop</name>
+	<groupId>com.adorsys.app.desktop</groupId>
+	<artifactId>kmail-desktop</artifactId>
+	<name>kmail-desktop</name>
 
-    <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
-    
-    <organization>
-        <!-- Used as the 'Vendor' for JNLP generation -->
-        <name>Your Organisation</name>
-    </organization>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
 
-    <properties>
-        <slf4j.version>1.6.1</slf4j.version>
-    </properties>
+	<organization>
+		<!-- Used as the 'Vendor' for JNLP generation -->
+		<name>Your Organisation</name>
+	</organization>
 
-    <build>
-        <plugins>
+	<properties>
+		<slf4j.version>1.6.1</slf4j.version>
+	</properties>
 
-            <plugin>
-                <groupId>com.zenjava</groupId>
-                <artifactId>javafx-maven-plugin</artifactId>
-                <version>1.3</version>
-                <configuration>
+	<build>
+		<plugins>
 
-                    <mainClass>com.adorsys.app.desktop.MainApp</mainClass>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>com.zenjava</groupId>
+				<artifactId>javafx-maven-plugin</artifactId>
+				<version>1.3</version>
+				<configuration>
 
-                    <!-- only required if signing the jar file -->
-                    <keyStoreAlias>example-user</keyStoreAlias>
-                    <keyStorePassword>example-password</keyStorePassword>
-                    <permissions>
-                        <permission>all-permissions</permission>
-                    </permissions>
+					<mainClass>com.adorsys.app.desktop.MainApp</mainClass>
 
-                </configuration>
-            </plugin>
+					<!-- only required if signing the jar file -->
+					<keyStoreAlias>example-user</keyStoreAlias>
+					<keyStorePassword>example-password</keyStorePassword>
+					<permissions>
+						<permission>all-permissions</permission>
+					</permissions>
 
-        </plugins>
-    </build>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
 
 
-    <dependencies>
-    
-        <!-- MigLayout -->
+	<dependencies>
 
-        <dependency>
-            <groupId>com.miglayout</groupId>
-            <artifactId>miglayout-javafx</artifactId>
-            <version>4.2</version>
-        </dependency>
+		<!-- MigLayout -->
 
-        <!-- Apache Commons -->
+		<dependency>
+			<groupId>com.miglayout</groupId>
+			<artifactId>miglayout-javafx</artifactId>
+			<version>4.2</version>
+		</dependency>
 
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
-        </dependency>
+		<!-- Apache Commons -->
 
-        <!-- Logging  -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
 
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
-        </dependency>
-        
-        <!-- Kmail -->
-	        
-	    <dependency>
-	      <groupId>com.adorsys.app.api</groupId>
-	      <artifactId>kmail-api</artifactId>
-	    </dependency>
-	    
-	    <dependency>
-	      <groupId>com.adorsys.app.data</groupId>
-	      <artifactId>kmail-data</artifactId>
-	    </dependency>
-	    
-	    <dependency>
-	      <groupId>com.adorsys.app.service</groupId>
-	      <artifactId>kmail-service</artifactId>
-	    </dependency>
-	    
-    </dependencies>
+		<!-- Logging -->
 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>${slf4j.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<!-- override the scope to compile -->
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- Kmail -->
+
+		<dependency>
+			<groupId>com.adorsys.app.api</groupId>
+			<artifactId>kmail-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.adorsys.app.data</groupId>
+			<artifactId>kmail-data</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.adorsys.app.service</groupId>
+			<artifactId>kmail-service</artifactId>
+		</dependency>
+		<!-- spring test jpa -->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+
+		<!-- Junit -->
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+	</dependencies>
+	<repositories>
+		<repository>
+			<id>JBOSS_NEXUS</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public</url>
+		</repository>
+
+<!-- Used for JUnit, and other spring dependencies -->
+		<repository>
+			<id>repository.springframework.maven.release</id>
+			<name>Spring Framework Maven Release Repository</name>
+			<url>http://repo.springsource.org/libs-release</url>
+		</repository>
+
+	</repositories>
 </project>
