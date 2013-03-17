@@ -19,7 +19,7 @@
 
 	<organization>
 		<!-- Used as the 'Vendor' for JNLP generation -->
-		<name>Your Organisation</name>
+		<name>Adorsys SA</name>
 	</organization>
 
 	<properties>

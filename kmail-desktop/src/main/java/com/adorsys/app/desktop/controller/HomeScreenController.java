@@ -2,7 +2,6 @@ package com.adorsys.app.desktop.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;

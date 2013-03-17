@@ -5,15 +5,14 @@ package com.adorsys.app.desktop;
 
 import java.io.IOException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author w2b
@@ -49,7 +48,6 @@ public class ViewManager {
         LOGGER.debug("Loading FXML for main view from: {}", HOME_SCREEN_PAGE_NAME);
 		VBox homePage = FXMLLoader.load(getClass().getResource(HOME_SCREEN_PAGE_NAME));
 		Scene scene = new Scene(homePage, 800,400);
-		scene.setCursor(Cursor.OPEN_HAND);
 		showScene(scene, "Welcome To Kmail - Kmail");
 	}
 	

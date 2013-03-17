@@ -6,7 +6,10 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.adorsys.app.data.domain.ApplicationUser;
+
 public class MainApp extends Application {
+	private static Logger LOG = LoggerFactory.getLogger(MainApp.class) ;
 
     private static final Logger log = LoggerFactory.getLogger(MainApp.class);
 
@@ -14,9 +17,9 @@ public class MainApp extends Application {
         launch(args);
     }
 
-    public void start(Stage stage) throws Exception {
-
+	public void start(Stage stage) throws Exception {
         log.info("Starting Hello JavaFX and Maven demonstration application");
+        KmailApplicationContextUtils.initApplicationContext();
         ViewManager.initViewManager(stage);
         ViewManager.getViewManager().showLoginScreen();
     }
