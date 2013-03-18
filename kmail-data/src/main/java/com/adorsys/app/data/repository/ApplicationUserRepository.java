@@ -13,5 +13,5 @@ import com.adorsys.app.data.domain.ApplicationUser;
  */
 public interface ApplicationUserRepository extends CrudRepository<ApplicationUser, Long>{
 	
-	public ApplicationUser findByPassword(String password);
+	public ApplicationUser findByUserName(String userName);
 }

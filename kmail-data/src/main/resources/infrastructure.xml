@@ -22,5 +22,5 @@
 	</bean>
 	
 	<jdbc:embedded-database id="dataSource" type="HSQL" />
-
+	
 </beans>

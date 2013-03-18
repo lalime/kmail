@@ -13,6 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.adorsys.app.api.data.service.ApplicationUserDataService;
 import com.adorsys.app.data.domain.ApplicationUser;
 import com.adorsys.app.data.repository.ApplicationUserRepository;
 
@@ -29,14 +30,17 @@ public class SimpleRepositoryTests {
 	@Autowired
 	ApplicationUserRepository userRepository ;
 	
+	@Autowired
+	ApplicationUserDataService applicationUserDataService;
+	
 	@Test
 	public void testSaveApplicationUser(){
 		ApplicationUser applicationUser = new ApplicationUser();
 		applicationUser.setDefaultUser(true);
 		applicationUser.setPassword("test123");
 		applicationUser.setUserName("user0001");
-		applicationUser = userRepository.save(applicationUser);
-		Assert.assertEquals(applicationUser, userRepository.findOne(applicationUser.getId()));
-		Assert.assertEquals(applicationUser, userRepository.findByPassword("test123"));
+		applicationUserDataService.save(applicationUser);
+		Assert.assertEquals(applicationUser, applicationUserDataService.findOne(applicationUser.getId()));
+		Assert.assertEquals(applicationUser, applicationUserDataService.findByUserName("user0001"));
 	}
 }
