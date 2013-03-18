@@ -5,7 +5,13 @@ package com.adorsys.app.api.data;
 
 /**
  * @author w2b
- *
+ * 
+ * A simple Abstraction of the mail.
+ * 
+ * |protocol  |hostName   |port		|userName   			|password  |
+ * ---------------------------------------------------------------------
+ * |		  |			  |			|abc.def@yourdomain.com	|******	   |
+ * ---------------------------------------------------------------------
  */
 public interface MailAccountModelRepresentation {
 	

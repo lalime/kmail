@@ -9,8 +9,12 @@ import java.util.Date;
  * @author w2b
  * 
  * Use this class to lose coupling between application user and their mail accounts.
+ * 
+ * |user   |mailAccount  |
+ * -----------------------
+ * |userId |mailAccountId|
  */
-public interface AppUserMailAccountRepresentation {
+public interface ApplicationUserMailAccountRepresentation {
 	
 	public ApplicationUserModelRepresentation getApplicationUser();
 	

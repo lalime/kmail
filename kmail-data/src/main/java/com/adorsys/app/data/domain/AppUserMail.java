@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import com.adorsys.app.api.data.AppUserMailModelRepresentation;
+import com.adorsys.app.api.data.ApplicationUserMailModelRepresentation;
 import com.adorsys.app.api.data.ApplicationUserModelRepresentation;
 import com.adorsys.app.api.data.MailAccountModelRepresentation;
 import com.adorsys.app.api.data.MailModelRepresentation;
@@ -19,7 +19,7 @@ import com.adorsys.app.api.data.MailModelRepresentation;
  *
  */
 @Entity
-public class AppUserMail extends AbstractPersistable<Long> implements AppUserMailModelRepresentation{
+public class AppUserMail extends AbstractPersistable<Long> implements ApplicationUserMailModelRepresentation{
 	
 	/**
 	 * 

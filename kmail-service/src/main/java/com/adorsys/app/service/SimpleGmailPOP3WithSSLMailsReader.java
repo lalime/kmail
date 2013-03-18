@@ -18,7 +18,7 @@ import javax.mail.internet.ContentType;
 import javax.mail.internet.ParseException;
 
 import com.adorsys.app.api.data.MailModelRepresentation;
-import com.adorsys.app.api.service.MailReader;
+import com.adorsys.app.api.mail.service.MailReader;
 import com.adorsys.app.service.bean.SimpleMailBean;
 import com.sun.mail.pop3.POP3SSLStore;
 

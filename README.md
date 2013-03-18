@@ -1,4 +1,4 @@
-This is a simple application used to Read/Send mails.
+Kmail is an intuitive tool used with some \'magics\' to Read&Send mails.
 
 Quick Start
 ===========

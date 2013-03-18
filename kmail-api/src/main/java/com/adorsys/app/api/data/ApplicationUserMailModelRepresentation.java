@@ -8,9 +8,14 @@ import java.util.Date;
 /**
  * @author w2b
  * 
- * List of user's mails associated to his account.
+ * Table of users with theirs mails and theirs associated mail account to this mail.
+ * 
+ * |mailAccount   |applicationUser   |mail        |receptionDate   |receptionTime    |readed    |inTrash|
+ * ------------------------------------------------------------------------------------------------------
+ * |mailAccountId |applicationUserId |mailId      |22-03-2010      |15:15:30         |false     |false  |
+ * ------------------------------------------------------------------------------------------------------
  */
-public interface AppUserMailModelRepresentation {
+public interface ApplicationUserMailModelRepresentation {
 	public MailAccountModelRepresentation getMailAccount();
 	
 	public void setMailAccount(MailAccountModelRepresentation mailAccount);

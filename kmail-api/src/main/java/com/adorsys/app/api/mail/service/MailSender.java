@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.adorsys.app.api.service;
+package com.adorsys.app.api.mail.service;
 
 import java.util.List;
 

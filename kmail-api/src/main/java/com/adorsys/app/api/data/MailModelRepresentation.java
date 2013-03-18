@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * @author w2b
- *
+ * 
  */
 public interface MailModelRepresentation {
 	

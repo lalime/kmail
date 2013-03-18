@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-import com.adorsys.app.api.data.AppUserMailAccountRepresentation;
+import com.adorsys.app.api.data.ApplicationUserMailAccountRepresentation;
 import com.adorsys.app.api.data.ApplicationUserModelRepresentation;
 import com.adorsys.app.api.data.MailAccountModelRepresentation;
 
@@ -18,7 +18,7 @@ import com.adorsys.app.api.data.MailAccountModelRepresentation;
  *
  */
 @Entity
-public class AppUserMailAccount extends AbstractPersistable<Long> implements AppUserMailAccountRepresentation{
+public class AppUserMailAccount extends AbstractPersistable<Long> implements ApplicationUserMailAccountRepresentation{
 	
 	private static final long serialVersionUID = 7517136670448466409L;
 

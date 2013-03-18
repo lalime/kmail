@@ -6,7 +6,14 @@ package com.adorsys.app.api.data;
 
 /**
  * @author w2b
- *
+ * Abstraction of the user model. <br />
+ * 
+ * Example Of Representation
+ * 
+ * |userName    |password     |isDefaultUser   |
+ * ---------------------------------------------
+ * |b.TheMaster |retsaMehT.b  |true			   |
+ * ---------------------------------------------
  */
 public interface ApplicationUserModelRepresentation {
 	

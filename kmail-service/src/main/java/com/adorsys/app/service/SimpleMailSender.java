@@ -11,7 +11,7 @@ import org.apache.commons.mail.SimpleEmail;
 
 import com.adorsys.app.api.data.MailAccountModelRepresentation;
 import com.adorsys.app.api.data.MailModelRepresentation;
-import com.adorsys.app.api.service.MailSender;
+import com.adorsys.app.api.mail.service.MailSender;
 
 /**
  * @author w2b
