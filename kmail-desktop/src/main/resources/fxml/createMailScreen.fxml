@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.web.*?>
+
+<AnchorPane id="AnchorPane" fx:id="newMailScreen" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" prefHeight="378.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adorsys.app.desktop.controller.CreateMailScreenController">
+  <children>
+    <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <children>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+          <children>
+            <Label text="From       :" />
+            <ComboBox editable="true">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+              <HBox.margin>
+                <Insets left="40.0" fx:id="x3" />
+              </HBox.margin>
+            </ComboBox>
+          </children>
+          <VBox.margin>
+            <Insets bottom="15.0" top="6.0" />
+          </VBox.margin>
+        </HBox>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+          <children>
+            <Label text="To           :" />
+            <ComboBox editable="true" HBox.margin="$x3">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Item 1" />
+                  <String fx:value="Item 2" />
+                  <String fx:value="Item 3" />
+                </FXCollections>
+              </items>
+            </ComboBox>
+          </children>
+          <VBox.margin>
+            <Insets bottom="6.0" fx:id="x2" />
+          </VBox.margin>
+        </HBox>
+        <HTMLEditor fx:id="mailEditor" prefHeight="-1.0" prefWidth="-1.0">
+          <VBox.margin>
+            <Insets fx:id="x1" />
+          </VBox.margin>
+        </HTMLEditor>
+        <HBox prefHeight="-1.0" prefWidth="-1.0" VBox.margin="$x2">
+          <children>
+            <Button fx:id="sendButton" mnemonicParsing="false" onMouseClicked="#onSendButtonMouseClicked" text="Send" />
+            <Button fx:id="discardButton" mnemonicParsing="false" onMouseClicked="#onDiscardButtonMouseClicked" text="Discard" />
+            <Button fx:id="draftButton" mnemonicParsing="false" onMouseClicked="#onDraftButtonMouseClicked" text="Draft" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+  </children>
+</AnchorPane>

@@ -1,7 +1,5 @@
 package com.adorsys.app.desktop.controller;
 
-import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -39,12 +37,7 @@ public class LoginScreenController
         }
 
         if (builder.length() > 0) {
-            try {
-				ViewManager.getViewManager().showHomepage();
-			} catch (IOException e) {
-				e.printStackTrace();
-				log.error(e.getMessage(), e);
-			}
+			ViewManager.getViewManager().showHomepage();
         } else {
             log.debug("Neither first name nor last name was set, saying hello to anonymous person");
             messageLabel.setText("Hello mysterious person");

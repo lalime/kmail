@@ -54,7 +54,7 @@
     </MenuBar>
     <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <TextField fx:id="searchField" layoutX="438.0" layoutY="14.0" maxHeight="-1.0" maxWidth="1.7976931348623157E308" onKeyPressed="#onSearchFieldKeyPressed" onKeyReleased="#onSearchFieldKeyReleased" prefWidth="331.0">
+        <TextField fx:id="searchField" layoutY="14.0" maxHeight="-1.0" maxWidth="1.7976931348623157E308" onKeyPressed="#onSearchFieldKeyPressed" onKeyReleased="#onSearchFieldKeyReleased" prefWidth="331.0" AnchorPane.rightAnchor="0.0">
           <effect>
             <DropShadow offsetX="5.0" offsetY="5.0">
               <color>
@@ -66,28 +66,13 @@
             <Tooltip text="edit to search mails ..." />
           </tooltip>
         </TextField>
-        <BorderPane layoutX="14.0" layoutY="44.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="332.0" prefWidth="786.0">
+        <BorderPane layoutY="44.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="false" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
           <center>
-            <TabPane fx:id="mainTabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="300.0" prefWidth="594.0" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab fx:id="mailListTab" onClosed="#onMailListTabClosed" onSelectionChanged="#onMailListTabSelectionChanged" text="Untitled Tab 1">
-                  <content>
-                    <AnchorPane id="Content" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                      <children>
-                        <TableView fx:id="mailListTableView" focusTraversable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" pickOnBounds="true" prefHeight="238.0" prefWidth="526.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columns>
-                            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="88.0" text="From" />
-                            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="391.0" text="Subject" />
-                            <TableColumn maxWidth="5000.0" minWidth="10.0" prefWidth="113.0" text="Date" />
-                          </columns>
-                        </TableView>
-                        <Text id="tryItText" fx:id="justTryItText" layoutX="357.0" layoutY="254.0" scaleX="1.9850255819905325" scaleY="1.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Just try It ..." />
-                      </children>
-                    </AnchorPane>
-                  </content>
-                </Tab>
-              </tabs>
-            </TabPane>
+            <AnchorPane fx:id="mainContainer" cache="false" prefHeight="200.0" prefWidth="200.0">
+              <BorderPane.margin>
+                <Insets />
+              </BorderPane.margin>
+            </AnchorPane>
           </center>
           <left>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="151.0" prefHeight="274.0" prefWidth="192.0">
@@ -107,9 +92,9 @@
             </VBox>
           </left>
           <top>
-            <ToolBar focusTraversable="true" prefWidth="624.0">
+            <ToolBar focusTraversable="true" prefWidth="-1.0">
               <items>
-                <Button fx:id="newMailBtn" mnemonicParsing="false" text="New Mail" />
+                <Button fx:id="newMailBtn" mnemonicParsing="false" onMouseClicked="#onNewMailButtonClicked" text="New Mail" />
                 <ComboBox fx:id="actionComboBox" promptText="Actions">
                   <items>
                     <FXCollections fx:factory="observableArrayList">
@@ -121,6 +106,9 @@
                   </items>
                 </ComboBox>
               </items>
+              <BorderPane.margin>
+                <Insets />
+              </BorderPane.margin>
             </ToolBar>
           </top>
         </BorderPane>
