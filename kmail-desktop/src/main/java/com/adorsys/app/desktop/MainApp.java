@@ -6,8 +6,6 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.adorsys.app.data.domain.ApplicationUser;
-
 public class MainApp extends Application {
 	private static Logger LOG = LoggerFactory.getLogger(MainApp.class) ;
 

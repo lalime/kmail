@@ -7,11 +7,12 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 
-import com.adorsys.app.data.repository.AppUserMailAccountRepository;
-import com.adorsys.app.data.repository.AppUserMailRepository;
-import com.adorsys.app.data.repository.ApplicationUserRepository;
-import com.adorsys.app.data.repository.MailAccountRepository;
-import com.adorsys.app.data.repository.MailRepository;
+import com.adorsys.app.api.data.service.ApplicationUserDataService;
+import com.adorsys.app.api.data.service.ApplicationUserMailAccountDataService;
+import com.adorsys.app.api.data.service.ApplicationUserMailDataService;
+import com.adorsys.app.api.data.service.MailAccountDataService;
+import com.adorsys.app.api.data.service.MailDataService;
+import com.adorsys.app.data.domain.ApplicationUser;
 
 /**
  * @author w2b
@@ -22,15 +23,15 @@ public class KmailApplicationContextUtils {
 	
 	private static GenericApplicationContext applicationContext;
 	
-	private static ApplicationUserRepository applicationUserRepository ;
+	private static ApplicationUserDataService applicationUserDataService ;
 	
-	private static AppUserMailAccountRepository appUserMailAccountRepository;
+	private static ApplicationUserMailAccountDataService appUserMailAccountDataService;
 	
-	private static AppUserMailRepository appUserMailRepository;
+	private static ApplicationUserMailDataService appUserMailDataService;
 	
-	private static MailAccountRepository mailAccountRepository;
+	private static MailAccountDataService mailAccountDataService;
 	
-	private static MailRepository mailRepository;
+	private static MailDataService mailDataService;
 	
 	private static boolean kmailApplicatioinContexUtilsInited  = false;
 	
@@ -45,13 +46,21 @@ public class KmailApplicationContextUtils {
 				applicationContext = new AnnotationConfigApplicationContext(AppConfiguration.class);
 				applicationContext.start();
 				
-				applicationUserRepository = applicationContext.getBean(ApplicationUserRepository.class);
-				appUserMailAccountRepository = applicationContext.getBean(AppUserMailAccountRepository.class);
-				appUserMailRepository =  applicationContext.getBean(AppUserMailRepository.class);
-				mailAccountRepository = applicationContext.getBean(MailAccountRepository.class);
-				mailRepository = applicationContext.getBean(MailRepository.class);
+				applicationUserDataService = applicationContext.getBean(ApplicationUserDataService.class);
+				appUserMailAccountDataService = applicationContext.getBean(ApplicationUserMailAccountDataService.class);
+				appUserMailDataService =  applicationContext.getBean(ApplicationUserMailDataService.class);
+				mailAccountDataService = applicationContext.getBean(MailAccountDataService.class);
+				mailDataService = applicationContext.getBean(MailDataService.class);
 				
 				kmailApplicatioinContexUtilsInited = true ;
+				
+
+				ApplicationUser applicationUser = new ApplicationUser();
+				applicationUser.setDefaultUser(true);
+				applicationUser.setPassword("test123");
+				applicationUser.setUserName("user0001");
+				applicationUserDataService.save(applicationUser);
+				System.out.println(applicationUserDataService.findByUserName("user0001").toString());
 			} catch (BeansException e) {
 				e.printStackTrace();
 			}catch (Exception e) {
@@ -65,26 +74,26 @@ public class KmailApplicationContextUtils {
 					"KmailApplicationContextUtils.initApplicationContext(); on in MainApp.java");
 		}
 	}
-	public static ApplicationUserRepository getApplicationUserRepository(){
+	public static ApplicationUserDataService getApplicationUserRepository(){
 		checkAndInitKmailApplicationContext();
-		return applicationUserRepository;
+		return applicationUserDataService;
 	}
 	
-	public static AppUserMailAccountRepository getAppUserMailAccountRepository() {
+	public static ApplicationUserMailAccountDataService getAppUserMailAccountRepository() {
 		checkAndInitKmailApplicationContext();
-		return appUserMailAccountRepository;
+		return appUserMailAccountDataService;
 	}
-	public static AppUserMailRepository getAppUserMailRepository() {
+	public static ApplicationUserMailDataService getAppUserMailRepository() {
 		checkAndInitKmailApplicationContext();
-		return appUserMailRepository;
+		return appUserMailDataService;
 	}
-	public static MailAccountRepository getMailAccountRepository() {
+	public static MailAccountDataService getMailAccountRepository() {
 		checkAndInitKmailApplicationContext();
-		return mailAccountRepository;
+		return mailAccountDataService;
 	}
-	public static MailRepository getMailRepository() {
+	public static MailDataService getMailRepository() {
 		checkAndInitKmailApplicationContext();
-		return mailRepository;
+		return mailDataService;
 	}
 	
 }
