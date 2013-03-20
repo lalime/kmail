@@ -16,7 +16,7 @@
         <HBox prefHeight="100.0" prefWidth="200.0">
           <children>
             <Label text="From       :" />
-            <ComboBox editable="true">
+            <ComboBox fx:id="mailFromComboBox" editable="true" onMouseClicked="#onMailFromComboBoxClicked">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Item 1" />
@@ -36,7 +36,7 @@
         <HBox prefHeight="100.0" prefWidth="200.0">
           <children>
             <Label text="To           :" />
-            <ComboBox editable="true" HBox.margin="$x3">
+            <ComboBox fx:id="mailToComboBox" editable="true" onMouseClicked="#onMailToComboBoxClicked" HBox.margin="$x3">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Item 1" />
@@ -49,6 +49,21 @@
           <VBox.margin>
             <Insets bottom="6.0" fx:id="x2" />
           </VBox.margin>
+        </HBox>
+        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0" VBox.margin="$x1">
+          <children>
+            <Label text="cc    :" />
+            <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="-1.0" />
+          </children>
+          <padding>
+            <Insets fx:id="x1" />
+          </padding>
+        </HBox>
+        <HBox prefHeight="16.0" prefWidth="600.0">
+          <children>
+            <Label text="Subject :" />
+            <TextField prefWidth="200.0" HBox.margin="$x1" />
+          </children>
         </HBox>
         <HTMLEditor fx:id="mailEditor" prefHeight="-1.0" prefWidth="-1.0">
           <VBox.margin>

@@ -4,20 +4,23 @@
 package com.adorsys.app.desktop;
 
 import java.io.IOException;
-import java.util.Set;
+import java.util.Date;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.util.Assert;
+
+import com.adorsys.app.desktop.model.TableMailModel;
 
 /**
  * @author w2b
@@ -69,6 +72,7 @@ public class ViewManager {
 	public void showHomepage() {
 		Scene scene = new Scene(viewManager.homeScreen, 800,400);
 		showScene(scene, "Welcome To Kmail - Kmail");
+		showMailList();
 	}
 	
 	public void showLoginScreen() {
@@ -85,6 +89,28 @@ public class ViewManager {
 		viewManager.mainScreenAnchorPane.getChildren().add(viewManager.createMailScreen);
 		viewManager.createMailScreen.autosize();
 	}
+	
+	public void showMailList(){
+
+        TableView<TableMailModel> mailTableView = new TableView<TableMailModel>();
+        
+        TableColumn<TableMailModel, String> mailFromColumn = new  TableColumn<TableMailModel, String>("From");
+        TableColumn<TableMailModel, String> mailSubjectColumn =  new TableColumn<TableMailModel, String>("Subject");
+        TableColumn<TableMailModel, String> mailDateColumn = new TableColumn<TableMailModel, String>("Date");
+        
+		mailFromColumn.setCellValueFactory(new PropertyValueFactory<TableMailModel, String>("from"));
+		mailSubjectColumn.setCellValueFactory(new PropertyValueFactory<TableMailModel, String>("subject"));
+		mailDateColumn.setCellValueFactory(new PropertyValueFactory<TableMailModel, String>("date"));
+		
+		mailTableView.getColumns().addAll(mailFromColumn,mailSubjectColumn,mailDateColumn);
+		mailTableView.setPrefHeight(200);
+		mailTableView.setPrefWidth(600);
+		mailTableView.setMaxHeight(Double.MAX_VALUE);
+		mailTableView.setMaxWidth(Double.MAX_VALUE);
+		
+		mailTableView.getItems().add(new TableMailModel("boris.waguia@adorsys.com", "welcome to kmail", new Date().toString()));
+		showList(mailTableView );
+	}
 	private void showScene(Scene scene,String stageTitle){
 		getStage().setScene(scene);
 		if(stageTitle!= null) {
@@ -96,11 +122,14 @@ public class ViewManager {
 	private Stage getStage(){
 		return viewManager.mainStage;
 	}
-	private void setStage(Stage stage){
-		viewManager.mainStage = stage;
-	}
 	public static void setMainScreenAnchorPane(AnchorPane anchorPane){
 		if(anchorPane == null || viewManager == null) throw new IllegalArgumentException("Null value is not required");
 		viewManager.mainScreenAnchorPane = anchorPane;
 	}
+	
+	private <T> void showList(TableView<T> tableView){
+		viewManager.mainScreenAnchorPane.getChildren().clear();
+		viewManager.mainScreenAnchorPane.getChildren().add(tableView);
+	}
+	
 }
