@@ -15,8 +15,12 @@
       <children>
         <HBox prefHeight="100.0" prefWidth="200.0">
           <children>
-            <Label text="From       :" />
-            <ComboBox fx:id="mailFromComboBox" editable="true" onMouseClicked="#onMailFromComboBoxClicked">
+            <Label prefWidth="66.0" text="From :">
+              <HBox.margin>
+                <Insets fx:id="x1" />
+              </HBox.margin>
+            </Label>
+            <ComboBox fx:id="mailFromComboBox" editable="true" onMouseClicked="#onMailFromComboBoxClicked" prefWidth="200.0">
               <items>
                 <FXCollections fx:factory="observableArrayList">
                   <String fx:value="Item 1" />
@@ -25,44 +29,39 @@
                 </FXCollections>
               </items>
               <HBox.margin>
-                <Insets left="40.0" fx:id="x3" />
+                <Insets left="50.0" fx:id="x3" />
               </HBox.margin>
             </ComboBox>
           </children>
           <VBox.margin>
-            <Insets bottom="15.0" top="6.0" />
+            <Insets bottom="6.0" top="6.0" />
           </VBox.margin>
         </HBox>
         <HBox prefHeight="100.0" prefWidth="200.0">
           <children>
-            <Label text="To           :" />
-            <ComboBox fx:id="mailToComboBox" editable="true" onMouseClicked="#onMailToComboBoxClicked" HBox.margin="$x3">
-              <items>
-                <FXCollections fx:factory="observableArrayList">
-                  <String fx:value="Item 1" />
-                  <String fx:value="Item 2" />
-                  <String fx:value="Item 3" />
-                </FXCollections>
-              </items>
-            </ComboBox>
+            <Label prefWidth="66.0" text="To :" HBox.margin="$x1" />
+            <TextField fx:id="mailToField" prefWidth="400.0" HBox.margin="$x3" />
           </children>
           <VBox.margin>
             <Insets bottom="6.0" fx:id="x2" />
           </VBox.margin>
         </HBox>
-        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0" VBox.margin="$x1">
+        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="-1.0" prefWidth="-1.0">
           <children>
-            <Label text="cc    :" />
-            <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="-1.0" />
+            <Label prefWidth="66.0" text="cc :" HBox.margin="$x1" />
+            <TextField fx:id="ccField" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" HBox.margin="$x3" />
           </children>
           <padding>
             <Insets fx:id="x1" />
           </padding>
+          <VBox.margin>
+            <Insets bottom="6.0" fx:id="x2" />
+          </VBox.margin>
         </HBox>
-        <HBox prefHeight="16.0" prefWidth="600.0">
+        <HBox padding="$x2" prefHeight="16.0" prefWidth="600.0">
           <children>
-            <Label text="Subject :" />
-            <TextField prefWidth="200.0" HBox.margin="$x1" />
+            <Label prefWidth="66.0" text="Subject :" HBox.margin="$x1" />
+            <TextField fx:id="subjectField" prefWidth="400.0" HBox.margin="$x3" />
           </children>
         </HBox>
         <HTMLEditor fx:id="mailEditor" prefHeight="-1.0" prefWidth="-1.0">
@@ -70,12 +69,15 @@
             <Insets fx:id="x1" />
           </VBox.margin>
         </HTMLEditor>
-        <HBox prefHeight="-1.0" prefWidth="-1.0" VBox.margin="$x2">
+        <HBox prefHeight="-1.0" prefWidth="-1.0">
           <children>
             <Button fx:id="sendButton" mnemonicParsing="false" onMouseClicked="#onSendButtonMouseClicked" text="Send" />
             <Button fx:id="discardButton" mnemonicParsing="false" onMouseClicked="#onDiscardButtonMouseClicked" text="Discard" />
             <Button fx:id="draftButton" mnemonicParsing="false" onMouseClicked="#onDraftButtonMouseClicked" text="Draft" />
           </children>
+          <VBox.margin>
+            <Insets bottom="6.0" fx:id="x2" />
+          </VBox.margin>
         </HBox>
       </children>
     </VBox>

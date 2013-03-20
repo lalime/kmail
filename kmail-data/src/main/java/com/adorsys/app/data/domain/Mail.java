@@ -73,12 +73,13 @@ public class Mail extends AbstractPersistable<Long> implements MailModelRepresen
 		this.contentType = contentType;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "Mail [addressFrom=" + addressFrom + ", addressTo=" + addressTo
 				+ ", subject=" + subject + ", sendDate=" + sendDate
-				+ ", contentType=" + contentType + ", Id=" + getId()
-				+ ", New=" + isNew() + "]";
+				+ ", contentType=" + contentType + ", body=" + body + "]";
 	}
 
 	@Override

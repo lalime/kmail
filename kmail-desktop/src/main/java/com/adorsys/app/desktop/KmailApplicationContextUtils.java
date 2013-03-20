@@ -74,24 +74,24 @@ public class KmailApplicationContextUtils {
 					"KmailApplicationContextUtils.initApplicationContext(); on in MainApp.java");
 		}
 	}
-	public static ApplicationUserDataService getApplicationUserRepository(){
+	public static ApplicationUserDataService getApplicationUserDataService(){
 		checkAndInitKmailApplicationContext();
 		return applicationUserDataService;
 	}
 	
-	public static ApplicationUserMailAccountDataService getAppUserMailAccountRepository() {
+	public static ApplicationUserMailAccountDataService getAppUserMailAccountDataService() {
 		checkAndInitKmailApplicationContext();
 		return appUserMailAccountDataService;
 	}
-	public static ApplicationUserMailDataService getAppUserMailRepository() {
+	public static ApplicationUserMailDataService getAppUserMailDataService() {
 		checkAndInitKmailApplicationContext();
 		return appUserMailDataService;
 	}
-	public static MailAccountDataService getMailAccountRepository() {
+	public static MailAccountDataService getMailAccountDataService() {
 		checkAndInitKmailApplicationContext();
 		return mailAccountDataService;
 	}
-	public static MailDataService getMailRepository() {
+	public static MailDataService getMailDataService() {
 		checkAndInitKmailApplicationContext();
 		return mailDataService;
 	}

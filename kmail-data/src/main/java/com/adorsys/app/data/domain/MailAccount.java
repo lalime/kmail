@@ -20,7 +20,7 @@ public class MailAccount extends AbstractPersistable<Long> implements MailAccoun
 
 	private String protocol;
 	
-	private String url;
+	private String hostName;
 	
 	private String port ;
 	
@@ -37,11 +37,11 @@ public class MailAccount extends AbstractPersistable<Long> implements MailAccoun
 	}
 
 	public String getHostName() {
-		return url;
+		return hostName;
 	}
 
 	public void setHostName(String url) {
-		this.url = url;
+		this.hostName = url;
 	}
 
 	public String getPort() {
@@ -70,7 +70,7 @@ public class MailAccount extends AbstractPersistable<Long> implements MailAccoun
 
 	@Override
 	public String toString() {
-		return "MailAccount [protocol=" + protocol + ", url=" + url + ", port="
+		return "MailAccount [protocol=" + protocol + ", url=" + hostName + ", port="
 				+ port + ", userName=" + userName + ", password=" + password
 				+ ", Id=" + getId() + ", isNew=" + isNew() + "]";
 	}

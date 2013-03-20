@@ -34,7 +34,7 @@ public class HomeScreenController {
     private URL location;
 
     @FXML
-    private ComboBox<?> actionComboBox;
+    private ComboBox<String> actionComboBox;
 
     @FXML
     private Ellipse ellipse;
@@ -99,6 +99,7 @@ public class HomeScreenController {
 
     @FXML
     void onReceivedLabelMailClicked(MouseEvent event) {
+    	ViewManager.getViewManager().showMailList();
     }
 
     @FXML

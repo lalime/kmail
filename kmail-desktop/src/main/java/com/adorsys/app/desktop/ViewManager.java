@@ -107,6 +107,7 @@ public class ViewManager {
 		mailTableView.setPrefWidth(600);
 		mailTableView.setMaxHeight(Double.MAX_VALUE);
 		mailTableView.setMaxWidth(Double.MAX_VALUE);
+		mailTableView.autosize();
 		
 		mailTableView.getItems().add(new TableMailModel("boris.waguia@adorsys.com", "welcome to kmail", new Date().toString()));
 		showList(mailTableView );
