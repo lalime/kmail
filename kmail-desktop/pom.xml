@@ -132,14 +132,25 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
+		<!-- auto complete -->
+		<dependency>
+			<groupId>com.mytdev</groupId>
+			<artifactId>jfx-autocomplete-textfield</artifactId>
+			<version>0.0.1</version>
+		</dependency>
 	</dependencies>
 	<repositories>
+		<repository>
+			<id>MavenCentral</id>
+			<name>Maven repository</name>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
 		<repository>
 			<id>JBOSS_NEXUS</id>
 			<url>http://repository.jboss.org/nexus/content/groups/public</url>
 		</repository>
 
-<!-- Used for JUnit, and other spring dependencies -->
+		<!-- Used for JUnit, and other spring dependencies -->
 		<repository>
 			<id>repository.springframework.maven.release</id>
 			<name>Spring Framework Maven Release Repository</name>

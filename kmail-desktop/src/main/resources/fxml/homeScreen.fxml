@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<fx:root type="javafx.scene.layout.VBox" alignment="TOP_LEFT" disable="false" fillWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="800.0" rotate="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adorsys.app.desktop.controller.HomeScreenController">
+<fx:root type="javafx.scene.layout.VBox" alignment="CENTER" disable="false" fillWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="800.0" rotate="0.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adorsys.app.desktop.controller.HomeScreenController">
   <children>
     <MenuBar fx:id="menuBar" VBox.vgrow="NEVER">
       <menus>

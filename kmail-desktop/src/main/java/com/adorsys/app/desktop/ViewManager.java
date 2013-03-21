@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.Date;
 
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
@@ -56,7 +55,7 @@ public class ViewManager {
 	public static void initViewManager(Stage mainStage) throws IOException {
 		if(mainStage ==null) throw new IllegalArgumentException("The Main stage Is Required! Null Value is not accepted");
 		viewManager  = new ViewManager();
-		mainStage.setResizable(true);
+		mainStage.setResizable(false);
 		viewManager.mainStage = mainStage;
 		
 		LOGGER.debug("Loading FXML for main view from: {}", viewManager.HOME_SCREEN_PAGE_NAME);
