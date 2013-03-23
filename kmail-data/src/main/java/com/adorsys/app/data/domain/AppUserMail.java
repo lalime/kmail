@@ -39,7 +39,7 @@ public class AppUserMail extends AbstractPersistable<Long> implements Applicatio
 	private boolean readed ;
 	
 	private boolean inTrash ;
-
+	
 	public MailAccountModelRepresentation getMailAccount() {
 		return mailAccount;
 	}

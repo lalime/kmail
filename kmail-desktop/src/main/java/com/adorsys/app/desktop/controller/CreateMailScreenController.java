@@ -20,6 +20,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.adorsys.app.api.data.MailAccountModelRepresentation;
+import com.adorsys.app.api.data.MailModelRepresentation;
+import com.adorsys.app.data.domain.AppUserMail;
 import com.adorsys.app.data.domain.Mail;
 import com.adorsys.app.desktop.KmailApplicationContextUtils;
 import com.adorsys.app.desktop.ViewManager;
@@ -66,10 +68,34 @@ public class CreateMailScreenController {
 
     @FXML
     void onDiscardButtonMouseClicked(MouseEvent event) {
+    	Mail mailInEdition = getMailInEdition();
+    	saveInTrashIfItIsANewMail(mailInEdition);
+    	ViewManager.getViewManager().showMailList();
     }
 
-    @FXML
+    private void saveInTrashIfItIsANewMail(Mail mailInEdition) {
+    	if(mailInEdition == null) return;
+    	boolean isANewMail = isANewMail(mailInEdition);
+    	if(isANewMail){
+    		saveInTrash(mailInEdition);
+    	}
+	}
+
+	private void saveInTrash(MailModelRepresentation mailInEdition) {
+		AppUserMail appUserMail = new AppUserMail();
+		appUserMail.setInTrash(true);
+		//appUserMail.setMail(mailInEdition);
+		KmailApplicationContextUtils.getAppUserMailDataService().save(appUserMail);
+	}
+
+	private boolean isANewMail(Mail mailInEdition) {
+		return mailInEdition.getId() == null;
+	}
+
+	@FXML
     void onDraftButtonMouseClicked(MouseEvent event) {
+		
+    	ViewManager.getViewManager().showMailList();
     }
 
     @FXML
@@ -78,24 +104,7 @@ public class CreateMailScreenController {
 
     @FXML
     void onSendButtonMouseClicked(MouseEvent event) {
-    	String mailFrom = mailFromComboBox.getSelectionModel().getSelectedItem();
-    	String mailTo = mailToField.getText();
-    	String mailsInCC = ccField.getText();
-    	String subject = subjectField.getText();
-    	String htmlText = mailEditor.getHtmlText();
-    	
-    	StringTokenizer stringTokenizer = new StringTokenizer(mailTo);
-    	List<String> mailsTo = new ArrayList<String>();
-    	while (stringTokenizer.hasMoreElements()) {
-			mailsTo.add(stringTokenizer.nextToken());
-		}
-    	
-    	Mail mail = new Mail();
-    	mail.setAddressFrom(Arrays.asList(mailFrom));
-    	mail.setBody(htmlText);
-    	mail.setSubject(subject);
-    	mail.setSendDate(new Date());
-    	mail.setAddressTo(mailsTo);
+    	Mail mail = getMailInEdition();
     	
     	LOGGER.info(mail.toString());
     	
@@ -113,6 +122,28 @@ public class CreateMailScreenController {
     	}
     	ViewManager.getViewManager().showMailList();
     }
+
+	private Mail getMailInEdition() {
+		String mailFrom = mailFromComboBox.getSelectionModel().getSelectedItem();
+    	String mailTo = mailToField.getText();
+    	String mailsInCC = ccField.getText();
+    	String subject = subjectField.getText();
+    	String htmlText = mailEditor.getHtmlText();
+    	
+    	StringTokenizer stringTokenizer = new StringTokenizer(mailTo);
+    	List<String> mailsTo = new ArrayList<String>();
+    	while (stringTokenizer.hasMoreElements()) {
+			mailsTo.add(stringTokenizer.nextToken());
+		}
+    	
+    	Mail mail = new Mail();
+    	mail.setAddressFrom(Arrays.asList(mailFrom));
+    	mail.setBody(htmlText);
+    	mail.setSubject(subject);
+    	mail.setSendDate(new Date());
+    	mail.setAddressTo(mailsTo);
+		return mail;
+	}
 
     @FXML
     void initialize() {
