@@ -40,6 +40,8 @@ public class AppUserMail extends AbstractPersistable<Long> implements Applicatio
 	
 	private boolean inTrash ;
 	
+	private boolean inDraft ;
+	
 	public MailAccountModelRepresentation getMailAccount() {
 		return mailAccount;
 	}
@@ -97,6 +99,14 @@ public class AppUserMail extends AbstractPersistable<Long> implements Applicatio
 		this.inTrash = inTrash;
 	}
 
+	public boolean isInDraft() {
+		return inDraft;
+	}
+
+	public void setInDraft(boolean inDraft) {
+		this.inDraft = inDraft;
+	}
+
 	@Override
 	public String toString() {
 		return "AppUserMail [mailAccount=" + mailAccount + ", applicationUser="
@@ -105,5 +115,7 @@ public class AppUserMail extends AbstractPersistable<Long> implements Applicatio
 				+ ", readed=" + readed + ", inTrash=" + inTrash + ", Id="
 				+ getId() + ", New=" + isNew() + "]";
 	}
+
+
 	
 }

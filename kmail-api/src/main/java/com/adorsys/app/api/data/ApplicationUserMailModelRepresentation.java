@@ -10,9 +10,9 @@ import java.util.Date;
  * 
  * Table of users with theirs mails and theirs associated mail account to this mail.
  * 
- * |mailAccount   |applicationUser   |mail        |receptionDate   |receptionTime    |readed    |inTrash|
- * ------------------------------------------------------------------------------------------------------
- * |mailAccountId |applicationUserId |mailId      |22-03-2010      |15:15:30         |false     |false  |
+ * |mailAccount   |applicationUser   |mail        |receptionDate   |receptionTime    |readed    |inTrash|inDraft|
+ * --------------------------------------------------------------------------------------------------------------
+ * |mailAccountId |applicationUserId |mailId      |22-03-2010      |15:15:30         |false     |false  |false  |
  * ------------------------------------------------------------------------------------------------------
  */
 public interface ApplicationUserMailModelRepresentation {
@@ -43,4 +43,8 @@ public interface ApplicationUserMailModelRepresentation {
 	public boolean isInTrash();
 	
 	public void setInTrash(boolean inTrash);
+	
+	public boolean isInDraft();
+	
+	public void setInDraft(boolean inDraft);
 }
