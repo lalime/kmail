@@ -69,21 +69,21 @@ public class CreateMailScreenController {
     @FXML
     void onDiscardButtonMouseClicked(MouseEvent event) {
     	Mail mailInEdition = getMailInEdition();
-    	saveInTrashIfItIsANewMail(mailInEdition);
+    	saveInDraftIfItIsANewMail(mailInEdition);
     	ViewManager.getViewManager().showMailList();
     }
 
-    private void saveInTrashIfItIsANewMail(Mail mailInEdition) {
+    private void saveInDraftIfItIsANewMail(Mail mailInEdition) {
     	if(mailInEdition == null) return;
     	boolean isANewMail = isANewMail(mailInEdition);
     	if(isANewMail){
-    		saveInTrash(mailInEdition);
+    		saveInDraft(mailInEdition);
     	}
 	}
 
-	private void saveInTrash(MailModelRepresentation mailInEdition) {
-		AppUserMail appUserMail = new AppUserMail();
-		appUserMail.setInTrash(true);
+	private void saveInDraft(MailModelRepresentation mailInEdition) {
+		AppUserMail appUserMail = (AppUserMail) mailInEdition;
+		appUserMail.setInDraft(true);
 		//appUserMail.setMail(mailInEdition);
 		KmailApplicationContextUtils.getAppUserMailDataService().save(appUserMail);
 	}
