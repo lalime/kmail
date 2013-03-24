@@ -12,8 +12,7 @@ import com.adorsys.app.api.data.ApplicationUserModelRepresentation;
 import com.adorsys.app.desktop.KmailApplicationContextUtils;
 import com.adorsys.app.desktop.ViewManager;
 
-public class LoginScreenController
-{
+public class LoginScreenController {
     private static final Logger log = LoggerFactory.getLogger(LoginScreenController.class);
 
     @FXML private TextField userNameField;

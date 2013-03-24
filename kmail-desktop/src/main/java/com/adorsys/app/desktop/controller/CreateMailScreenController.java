@@ -19,6 +19,7 @@ import javafx.scene.web.HTMLEditor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.adorsys.app.api.data.ApplicationUserMailModelRepresentation;
 import com.adorsys.app.api.data.MailAccountModelRepresentation;
 import com.adorsys.app.api.data.MailModelRepresentation;
 import com.adorsys.app.data.domain.AppUserMail;
@@ -64,7 +65,8 @@ public class CreateMailScreenController {
 
     @FXML
     private TextField subjectField;
-
+    
+    public static volatile Long MAIL_IN_EDITION_ID = null; 
 
     @FXML
     void onDiscardButtonMouseClicked(MouseEvent event) {
@@ -77,14 +79,16 @@ public class CreateMailScreenController {
     	if(mailInEdition == null) return;
     	boolean isANewMail = isANewMail(mailInEdition);
     	if(isANewMail){
-    		saveInDraft(mailInEdition);
+    		saveInDraft(mailInEdition,null);
     	}
 	}
 
-	private void saveInDraft(MailModelRepresentation mailInEdition) {
+	private void saveInDraft(MailModelRepresentation mailInEdition,MailAccountModelRepresentation mailAccount) {
+		KmailApplicationContextUtils.getMailDataService().save(mailInEdition);
 		AppUserMail appUserMail = new AppUserMail();
-		appUserMail.setApplicationUser(null);
-		appUserMail.setMail((MailModelRepresentation)mailInEdition);
+		appUserMail.setApplicationUser(KmailApplicationContextUtils.getApplicationUser());
+		appUserMail.setMail((Mail)mailInEdition);
+		appUserMail.setMail(mailInEdition);
 		appUserMail.setReaded(true);
 		appUserMail.setInDraft(true);
 		//appUserMail.setMail(mailInEdition);
@@ -92,17 +96,39 @@ public class CreateMailScreenController {
 	}
 
 	private boolean isANewMail(Mail mailInEdition) {
-		return mailInEdition.getId() == null;
+		boolean result = false ;
+		if(mailInEdition == null){
+			result = true;
+		}
+		if(mailInEdition.getId() == null || CreateMailScreenController.MAIL_IN_EDITION_ID == null){
+			result = true;
+		}
+		return result;
 	}
 
 	@FXML
     void onDraftButtonMouseClicked(MouseEvent event) {
-		
+		Mail mailInEdition = getMailInEdition();
+		if(isANewMail(mailInEdition)){
+			saveInDraft(mailInEdition, null);
+		}else {
+			Mail mailModel = (Mail)KmailApplicationContextUtils.getMailDataService().findOne(MAIL_IN_EDITION_ID);
+			this.transfertValues(mailInEdition, mailModel);
+			KmailApplicationContextUtils.getMailDataService().save(mailModel);
+		}
     	ViewManager.getViewManager().showMailList();
     }
-
+	private void transfertValues(Mail from, Mail to){
+		to.setAddressFrom(from.getAddressFrom());
+		to.setAddressTo(from.getAddressTo());
+		to.setBody(from.getBody());
+		to.setContentType(from.getContentType());
+		to.setSendDate(from.getSendDate());
+		to.setSubject(from.getSubject());
+	}
     @FXML
     void onMailFromComboBoxClicked(MouseEvent event) {
+    	//TODO: On Mail From ComboBox Clicked
     }
 
     @FXML
@@ -120,27 +146,39 @@ public class CreateMailScreenController {
     	try{
     		SimpleMailSender mailSender = new SimpleMailSender(mailAccount);
     		mailSender.sendMail(mail);
-    		AppUserMail appUserMail = new AppUserMail();
-    		appUserMail.setApplicationUser(null);
-    		appUserMail.setMail(mail);
-    		appUserMail.setMailAccount(mailAccount);
-    		appUserMail.setReaded(false);
-    		KmailApplicationContextUtils.getAppUserMailDataService().save(appUserMail);
+    		if(isANewMail(mail)){
+        		saveMail(mail, mailAccount);
+    		}else {
+    			updateMail(mail);
+    		}
     	}catch(Exception exception){
     		LOGGER.error(exception.getMessage(),exception);
-    		//save in draft
-    		AppUserMail appUserMail = new AppUserMail();
-    		appUserMail.setApplicationUser(null);
-    		appUserMail.setMail(mail);
-    		appUserMail.setMailAccount(mailAccount);
-    		appUserMail.setInDraft(true);
-    		appUserMail.setReaded(false);
-    		KmailApplicationContextUtils.getAppUserMailDataService().save(appUserMail);
+    		saveInDraft(mail, mailAccount);
     		//show the error screen
 //    		ViewManager.getViewManager().showErrorScreen(exception.getMessage());
     	}
     	ViewManager.getViewManager().showMailList();
     }
+
+	private void saveMail(Mail mail, MailAccountModelRepresentation mailAccount) {
+		AppUserMail appUserMail = new AppUserMail();
+		appUserMail.setApplicationUser(KmailApplicationContextUtils.getApplicationUser());
+		appUserMail.setMail(mail);
+		appUserMail.setMailAccount(mailAccount);
+		appUserMail.setReaded(false);
+		KmailApplicationContextUtils.getAppUserMailDataService().save(appUserMail);
+	}
+
+	private void updateMail(Mail mail) {
+		Mail mailModel = (Mail)KmailApplicationContextUtils.getMailDataService().findOne(MAIL_IN_EDITION_ID);
+		this.transfertValues(mail, mailModel);
+		KmailApplicationContextUtils.getMailDataService().save(mailModel);
+		ApplicationUserMailModelRepresentation appUserMail = KmailApplicationContextUtils.getAppUserMailDataService().findByMail(mailModel);
+		appUserMail.setInDraft(false);
+		appUserMail.setInTrash(false);
+		appUserMail.setReaded(true);
+		KmailApplicationContextUtils.getAppUserMailDataService().save(appUserMail);
+	}
 
 	private Mail getMailInEdition() {
 		String mailFrom = mailFromComboBox.getSelectionModel().getSelectedItem();
@@ -163,7 +201,7 @@ public class CreateMailScreenController {
     	mail.setAddressTo(mailsTo);
 		return mail;
 	}
-
+	
     @FXML
     void initialize() {
         assert ccField != null : "fx:id=\"ccField\" was not injected: check your FXML file 'createMailScreen.fxml'.";
@@ -180,5 +218,4 @@ public class CreateMailScreenController {
         this.mailFromComboBox.getItems().clear();
         this.mailFromComboBox.getItems().addAll(Arrays.asList("","boris.waguia@adorsys.com","b.waguia@gmail.com"));
     }
-
 }

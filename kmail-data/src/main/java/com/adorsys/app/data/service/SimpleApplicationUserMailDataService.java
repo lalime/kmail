@@ -11,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.adorsys.app.api.data.ApplicationUserMailModelRepresentation;
+import com.adorsys.app.api.data.MailModelRepresentation;
 import com.adorsys.app.api.data.service.ApplicationUserMailDataService;
 import com.adorsys.app.data.domain.AppUserMail;
+import com.adorsys.app.data.domain.Mail;
 import com.adorsys.app.data.repository.AppUserMailRepository;
 
 /**
@@ -50,6 +52,12 @@ public class SimpleApplicationUserMailDataService implements
 	@Override
 	public void delete(Long id) {
 		appUserMailRepository.delete(id);
+	}
+
+	@Override
+	public ApplicationUserMailModelRepresentation findByMail(
+			MailModelRepresentation mailModel) {
+		return appUserMailRepository.findByMail((Mail) mailModel);
 	}
 	
 }
