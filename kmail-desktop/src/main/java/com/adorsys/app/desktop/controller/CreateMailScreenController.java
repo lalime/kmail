@@ -82,7 +82,10 @@ public class CreateMailScreenController {
 	}
 
 	private void saveInDraft(MailModelRepresentation mailInEdition) {
-		AppUserMail appUserMail = (AppUserMail) mailInEdition;
+		AppUserMail appUserMail = new AppUserMail();
+		appUserMail.setApplicationUser(null);
+		appUserMail.setMail((MailModelRepresentation)mailInEdition);
+		appUserMail.setReaded(true);
 		appUserMail.setInDraft(true);
 		//appUserMail.setMail(mailInEdition);
 		KmailApplicationContextUtils.getAppUserMailDataService().save(appUserMail);
@@ -117,8 +120,24 @@ public class CreateMailScreenController {
     	try{
     		SimpleMailSender mailSender = new SimpleMailSender(mailAccount);
     		mailSender.sendMail(mail);
+    		AppUserMail appUserMail = new AppUserMail();
+    		appUserMail.setApplicationUser(null);
+    		appUserMail.setMail(mail);
+    		appUserMail.setMailAccount(mailAccount);
+    		appUserMail.setReaded(false);
+    		KmailApplicationContextUtils.getAppUserMailDataService().save(appUserMail);
     	}catch(Exception exception){
     		LOGGER.error(exception.getMessage(),exception);
+    		//save in draft
+    		AppUserMail appUserMail = new AppUserMail();
+    		appUserMail.setApplicationUser(null);
+    		appUserMail.setMail(mail);
+    		appUserMail.setMailAccount(mailAccount);
+    		appUserMail.setInDraft(true);
+    		appUserMail.setReaded(false);
+    		KmailApplicationContextUtils.getAppUserMailDataService().save(appUserMail);
+    		//show the error screen
+//    		ViewManager.getViewManager().showErrorScreen(exception.getMessage());
     	}
     	ViewManager.getViewManager().showMailList();
     }
