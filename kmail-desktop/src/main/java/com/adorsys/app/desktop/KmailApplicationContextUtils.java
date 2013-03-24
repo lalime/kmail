@@ -7,6 +7,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 
+import com.adorsys.app.api.data.ApplicationUserModelRepresentation;
 import com.adorsys.app.api.data.service.ApplicationUserDataService;
 import com.adorsys.app.api.data.service.ApplicationUserMailAccountDataService;
 import com.adorsys.app.api.data.service.ApplicationUserMailDataService;
@@ -34,6 +35,8 @@ public class KmailApplicationContextUtils {
 	private static MailDataService mailDataService;
 	
 	private static boolean kmailApplicatioinContexUtilsInited  = false;
+	
+	private static ApplicationUserModelRepresentation applicationUser;
 	
 	private KmailApplicationContextUtils(){
 		
@@ -94,6 +97,12 @@ public class KmailApplicationContextUtils {
 	public static MailDataService getMailDataService() {
 		checkAndInitKmailApplicationContext();
 		return mailDataService;
+	}
+	public static ApplicationUserModelRepresentation getApplicationUser() {
+		return applicationUser;
+	}
+	public static void setApplicationUser(ApplicationUserModelRepresentation applicationUser) {
+		KmailApplicationContextUtils.applicationUser = applicationUser;
 	}
 	
 }

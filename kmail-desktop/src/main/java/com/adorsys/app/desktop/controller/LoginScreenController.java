@@ -8,6 +8,8 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.adorsys.app.api.data.ApplicationUserModelRepresentation;
+import com.adorsys.app.desktop.KmailApplicationContextUtils;
 import com.adorsys.app.desktop.ViewManager;
 
 public class LoginScreenController
@@ -20,28 +22,27 @@ public class LoginScreenController
 
     public void onLogin() {
 
-        String firstName = userNameField.getText();
-        String lastName = passwordField.getText();
+        String userName = userNameField.getText();
+        String password = passwordField.getText();
 
-        StringBuilder builder = new StringBuilder();
-
-        if (!StringUtils.isEmpty(firstName)) {
-            builder.append(firstName);
+        if (StringUtils.isEmpty(userName)) {
+        	//TODO : the user name is required
         }
 
-        if (!StringUtils.isEmpty(lastName)) {
-            if (builder.length() > 0) {
-                builder.append(" ");
-            }
-            builder.append(lastName);
+        if (StringUtils.isEmpty(password)) {
+            //TODO : The password is required;
         }
-
-        if (builder.length() > 0) {
-			ViewManager.getViewManager().showHomepage();
-        } else {
-            log.debug("Neither first name nor last name was set, saying hello to anonymous person");
-            messageLabel.setText("Hello mysterious person");
+        if("kmail".equals(userName) && "test".equals(password)){
+        	ViewManager.getViewManager().showHomepage();
         }
+        ApplicationUserModelRepresentation applicationUser = KmailApplicationContextUtils.getApplicationUserDataService().findByUserName(userName);
+        if(applicationUser == null) messageLabel.setText("No user Found !");
+        if(! password.equals(applicationUser.getPassword())){
+        	messageLabel.setText("Invalid Credentials");
+        	return ;
+        }
+        KmailApplicationContextUtils.setApplicationUser(applicationUser);
+		ViewManager.getViewManager().showHomepage();
     }
 
 }
