@@ -130,10 +130,16 @@ public class HomeScreenController {
 
     @FXML
     void onSendedMailLabelClicked(MouseEvent event) {
+    	LOGGER.info("Searching for sended Mails ...");
+    	List<ApplicationUserMailModelRepresentation> sendedMails = KmailApplicationContextUtils.getAppUserMailDataService().findSendedMails();
+    	ViewManager.getViewManager().showMailList(sendedMails);
     }
 
     @FXML
     void onTrashedMailLabelClicked(MouseEvent event) {
+    	LOGGER.info("Searching for trashed Mails...");
+    	List<ApplicationUserMailModelRepresentation> trashedMails = KmailApplicationContextUtils.getAppUserMailDataService().findTrashedMails();
+    	ViewManager.getViewManager().showMailList(trashedMails);
     }
 
     @FXML
