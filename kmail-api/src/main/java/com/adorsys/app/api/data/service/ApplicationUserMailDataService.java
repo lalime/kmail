@@ -18,4 +18,12 @@ public interface ApplicationUserMailDataService {
 	public ApplicationUserMailModelRepresentation findOne(Long id);
 	public void delete(Long id);
 	public ApplicationUserMailModelRepresentation findByMail(MailModelRepresentation mailModel);
+	
+	public List<ApplicationUserMailModelRepresentation> findReceivedMails();
+	public List<ApplicationUserMailModelRepresentation> findSendedMails();
+	public List<ApplicationUserMailModelRepresentation> findDraftedMails();
+	public List<ApplicationUserMailModelRepresentation> findTrashedMails();
+	public List<ApplicationUserMailModelRepresentation> findDeletedMails();
+	
+	public List<ApplicationUserMailModelRepresentation> findUnreadedReceivedMails();
 }

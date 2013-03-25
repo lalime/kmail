@@ -20,8 +20,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.adorsys.app.api.data.ApplicationUserMailModelRepresentation;
+import com.adorsys.app.api.data.EditionState;
 import com.adorsys.app.api.data.MailAccountModelRepresentation;
 import com.adorsys.app.api.data.MailModelRepresentation;
+import com.adorsys.app.api.data.ViewState;
 import com.adorsys.app.data.domain.AppUserMail;
 import com.adorsys.app.data.domain.Mail;
 import com.adorsys.app.desktop.KmailApplicationContextUtils;
@@ -72,13 +74,14 @@ public class CreateMailScreenController {
     void onDiscardButtonMouseClicked(MouseEvent event) {
     	Mail mailInEdition = getMailInEdition();
     	saveInDraftIfItIsANewMail(mailInEdition);
-    	ViewManager.getViewManager().showMailList();
+    	ViewManager.getViewManager().showMailList(KmailApplicationContextUtils.getAppUserMailDataService().findDraftedMails());
     }
 
     private void saveInDraftIfItIsANewMail(Mail mailInEdition) {
     	if(mailInEdition == null) return;
     	boolean isANewMail = isANewMail(mailInEdition);
     	if(isANewMail){
+			LOGGER.info("Saving a new Mail");
     		saveInDraft(mailInEdition,null);
     	}
 	}
@@ -89,8 +92,8 @@ public class CreateMailScreenController {
 		appUserMail.setApplicationUser(KmailApplicationContextUtils.getApplicationUser());
 		appUserMail.setMail((Mail)mailInEdition);
 		appUserMail.setMail(mailInEdition);
-		appUserMail.setReaded(true);
-		appUserMail.setInDraft(true);
+		appUserMail.setViewState(ViewState.READED);
+		appUserMail.setEditionState(EditionState.IN_DRAFT);
 		//appUserMail.setMail(mailInEdition);
 		KmailApplicationContextUtils.getAppUserMailDataService().save(appUserMail);
 	}
@@ -116,7 +119,7 @@ public class CreateMailScreenController {
 			this.transfertValues(mailInEdition, mailModel);
 			KmailApplicationContextUtils.getMailDataService().save(mailModel);
 		}
-    	ViewManager.getViewManager().showMailList();
+    	ViewManager.getViewManager().showMailList(KmailApplicationContextUtils.getAppUserMailDataService().findDraftedMails());
     }
 	private void transfertValues(Mail from, Mail to){
 		to.setAddressFrom(from.getAddressFrom());
@@ -128,7 +131,7 @@ public class CreateMailScreenController {
 	}
     @FXML
     void onMailFromComboBoxClicked(MouseEvent event) {
-    	//TODO: On Mail From ComboBox Clicked
+//    	TODO: On Mail From ComboBox Clicked
     }
 
     @FXML
@@ -147,8 +150,10 @@ public class CreateMailScreenController {
     		SimpleMailSender mailSender = new SimpleMailSender(mailAccount);
     		mailSender.sendMail(mail);
     		if(isANewMail(mail)){
+    			LOGGER.info("Saving a new Mail");
         		saveMail(mail, mailAccount);
     		}else {
+    			LOGGER.info("Updating Mail");
     			updateMail(mail);
     		}
     	}catch(Exception exception){
@@ -157,7 +162,7 @@ public class CreateMailScreenController {
     		//show the error screen
 //    		ViewManager.getViewManager().showErrorScreen(exception.getMessage());
     	}
-    	ViewManager.getViewManager().showMailList();
+    	ViewManager.getViewManager().showMailList(KmailApplicationContextUtils.getAppUserMailDataService().findSendedMails());
     }
 
 	private void saveMail(Mail mail, MailAccountModelRepresentation mailAccount) {
@@ -165,7 +170,7 @@ public class CreateMailScreenController {
 		appUserMail.setApplicationUser(KmailApplicationContextUtils.getApplicationUser());
 		appUserMail.setMail(mail);
 		appUserMail.setMailAccount(mailAccount);
-		appUserMail.setReaded(false);
+		appUserMail.setViewState(ViewState.READED);
 		KmailApplicationContextUtils.getAppUserMailDataService().save(appUserMail);
 	}
 
@@ -174,9 +179,8 @@ public class CreateMailScreenController {
 		this.transfertValues(mail, mailModel);
 		KmailApplicationContextUtils.getMailDataService().save(mailModel);
 		ApplicationUserMailModelRepresentation appUserMail = KmailApplicationContextUtils.getAppUserMailDataService().findByMail(mailModel);
-		appUserMail.setInDraft(false);
-		appUserMail.setInTrash(false);
-		appUserMail.setReaded(true);
+		appUserMail.setViewState(ViewState.READED);
+		appUserMail.setEditionState(EditionState.IN_DRAFT);
 		KmailApplicationContextUtils.getAppUserMailDataService().save(appUserMail);
 	}
 

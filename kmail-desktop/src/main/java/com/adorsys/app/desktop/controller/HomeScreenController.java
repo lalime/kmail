@@ -1,8 +1,13 @@
 package com.adorsys.app.desktop.controller;
 
 import java.net.URL;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -14,19 +19,21 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Text;
 
+import com.adorsys.app.api.data.ApplicationUserMailModelRepresentation;
+import com.adorsys.app.api.data.MailModelRepresentation;
+import com.adorsys.app.desktop.KmailApplicationContextUtils;
 import com.adorsys.app.desktop.ViewManager;
 import com.adorsys.app.desktop.model.TableMailModel;
 
 
 public class HomeScreenController {
-
+	private static final Logger LOGGER = LoggerFactory.getLogger(HomeScreenController.class);
     @FXML
     private ResourceBundle resources;
 
@@ -99,8 +106,11 @@ public class HomeScreenController {
 
     @FXML
     void onReceivedLabelMailClicked(MouseEvent event) {
-    	ViewManager.getViewManager().showMailList();
+    	LOGGER.info("Searching All Received Mails...");
+    	List<ApplicationUserMailModelRepresentation> receivedMails = KmailApplicationContextUtils.getAppUserMailDataService().findReceivedMails();
+    	ViewManager.getViewManager().showMailList(receivedMails);
     }
+
 
     @FXML
     void onSearchFieldKeyPressed(KeyEvent event) {

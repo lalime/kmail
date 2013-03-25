@@ -4,7 +4,10 @@
 package com.adorsys.app.desktop;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,6 +22,8 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.adorsys.app.api.data.ApplicationUserMailModelRepresentation;
+import com.adorsys.app.api.data.MailModelRepresentation;
 import com.adorsys.app.desktop.model.TableMailModel;
 
 /**
@@ -71,7 +76,7 @@ public class ViewManager {
 	public void showHomepage() {
 		Scene scene = new Scene(viewManager.homeScreen, 800,400);
 		showScene(scene, "Welcome To Kmail - Kmail");
-		showMailList();
+		showMailList(null);
 	}
 	
 	public void showLoginScreen() {
@@ -89,7 +94,7 @@ public class ViewManager {
 		viewManager.createMailScreen.autosize();
 	}
 	
-	public void showMailList(){
+	public void showMailList(List<ApplicationUserMailModelRepresentation> data){
 
         TableView<TableMailModel> mailTableView = new TableView<TableMailModel>();
         
@@ -101,15 +106,27 @@ public class ViewManager {
 		mailSubjectColumn.setCellValueFactory(new PropertyValueFactory<TableMailModel, String>("subject"));
 		mailDateColumn.setCellValueFactory(new PropertyValueFactory<TableMailModel, String>("date"));
 		
-		mailTableView.getColumns().addAll(mailFromColumn,mailSubjectColumn,mailDateColumn);
+		mailTableView.getColumns().addAll(mailFromColumn,	mailSubjectColumn,mailDateColumn);
 		mailTableView.setPrefHeight(200);
 		mailTableView.setPrefWidth(600);
 		mailTableView.setMaxHeight(Double.MAX_VALUE);
 		mailTableView.setMaxWidth(Double.MAX_VALUE);
 		mailTableView.autosize();
-		
-		mailTableView.getItems().add(new TableMailModel("boris.waguia@adorsys.com", "welcome to kmail", new Date().toString()));
+		if(data == null || data.isEmpty()){
+			mailTableView.getItems().add(new TableMailModel("boris.waguia@adorsys.com", "welcome to kmail", new Date().toString()));			
+		}else {
+			mailTableView.getItems().addAll(convertToTableMailModels(data));
+		}
 		showList(mailTableView );
+	}
+
+	private Collection<TableMailModel> convertToTableMailModels(List<ApplicationUserMailModelRepresentation> receivedMails) {
+		Collection<TableMailModel> data = new ArrayList<TableMailModel>();
+    	for (ApplicationUserMailModelRepresentation appUserMail : receivedMails) {
+			MailModelRepresentation mail = appUserMail.getMail();
+			data.add(new TableMailModel(mail.getAddressFrom().toString(), mail.getSubject(),mail.getSendDate().toString()));
+		}
+		return data;
 	}
 	private void showScene(Scene scene,String stageTitle){
 		getStage().setScene(scene);

@@ -11,8 +11,10 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.adorsys.app.api.data.ApplicationUserMailModelRepresentation;
 import com.adorsys.app.api.data.ApplicationUserModelRepresentation;
+import com.adorsys.app.api.data.EditionState;
 import com.adorsys.app.api.data.MailAccountModelRepresentation;
 import com.adorsys.app.api.data.MailModelRepresentation;
+import com.adorsys.app.api.data.ViewState;
 
 /**
  * @author w2b
@@ -32,15 +34,13 @@ public class AppUserMail extends AbstractPersistable<Long> implements Applicatio
 	
 	private Mail mail ;
 	
-	private Date receptionDate;
+	private Date storingDate;
 	
-	private long receptionTime ;
+	private long storingTime ;
 	
-	private boolean readed ;
+	private ViewState viewState ;
 	
-	private boolean inTrash ;
-	
-	private boolean inDraft ;
+	private EditionState editionState;
 	
 	public MailAccountModelRepresentation getMailAccount() {
 		return mailAccount;
@@ -67,55 +67,37 @@ public class AppUserMail extends AbstractPersistable<Long> implements Applicatio
 		this.mail = (Mail) mail;
 	}
 
-	public Date getReceptionDate() {
-		return receptionDate;
+	public Date getStoringDate() {
+		return storingDate;
 	}
 
-	public void setReceptionDate(Date receptionDate) {
-		this.receptionDate = receptionDate;
+	public void setStoringDate(Date storingDate) {
+		this.storingDate = storingDate;
 	}
 
-	public long getReceptionTime() {
-		return receptionTime;
+	public long getStoringTime() {
+		return storingTime;
 	}
 
-	public void setReceptionTime(long receptionTime) {
-		this.receptionTime = receptionTime;
-	}
-	
-	public boolean isReaded() {
-		return readed;
+	public void setStoringTime(long storingTime) {
+		this.storingTime = storingTime;
 	}
 
-	public void setReaded(boolean readed) {
-		this.readed = readed;
+	public ViewState getViewState() {
+		return viewState;
 	}
 
-	public boolean isInTrash() {
-		return inTrash;
+	public void setViewState(ViewState viewState) {
+		this.viewState = viewState;
 	}
 
-	public void setInTrash(boolean inTrash) {
-		this.inTrash = inTrash;
+	public EditionState getEditionState() {
+		return editionState;
 	}
 
-	public boolean isInDraft() {
-		return inDraft;
+	public void setEditionState(EditionState editionState) {
+		this.editionState = editionState;
 	}
-
-	public void setInDraft(boolean inDraft) {
-		this.inDraft = inDraft;
-	}
-
-	@Override
-	public String toString() {
-		return "AppUserMail [mailAccount=" + mailAccount + ", applicationUser="
-				+ applicationUser + ", mail=" + mail + ", receptionDate="
-				+ receptionDate + ", receptionTime=" + receptionTime
-				+ ", readed=" + readed + ", inTrash=" + inTrash + ", Id="
-				+ getId() + ", New=" + isNew() + "]";
-	}
-
 
 	
 }

@@ -28,23 +28,19 @@ public interface ApplicationUserMailModelRepresentation {
 	
 	public void setMail(MailModelRepresentation mailModel);
 	
-	public Date getReceptionDate();
+	public Date getStoringDate();
 	
-	public void setReceptionDate(Date receptionDate);
+	public void setStoringDate(Date storingDate);
 	
-	public long getReceptionTime();
+	public long getStoringTime();
 	
-	public void setReceptionTime(long receptionTime);
+	public void setStoringTime(long storingTime);
 	
-	public boolean isReaded();
+	public ViewState getViewState();
 	
-	public void setReaded(boolean isReaded);
+	public void setViewState(ViewState viewState);
 	
-	public boolean isInTrash();
+	public EditionState getEditionState();
 	
-	public void setInTrash(boolean inTrash);
-	
-	public boolean isInDraft();
-	
-	public void setInDraft(boolean inDraft);
+	public void setEditionState(EditionState editionState);
 }

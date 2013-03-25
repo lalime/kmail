@@ -33,6 +33,7 @@ public class LoginScreenController {
         }
         if("kmail".equals(userName) && "test".equals(password)){
         	ViewManager.getViewManager().showHomepage();
+        	return;
         }
         ApplicationUserModelRepresentation applicationUser = KmailApplicationContextUtils.getApplicationUserDataService().findByUserName(userName);
         if(applicationUser == null) messageLabel.setText("No user Found !");
