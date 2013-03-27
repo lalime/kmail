@@ -15,5 +15,5 @@ public interface MailAccountDataService {
 	public void save(MailAccountModelRepresentation accountModelRepresentation);
 	public MailAccountModelRepresentation findOne(Long id);
 	public List<MailAccountModelRepresentation> findAll();
-	public MailAccountModelRepresentation findByHostName(String hostName);
+	public MailAccountModelRepresentation findByUserName(String userName);
 }

@@ -20,4 +20,8 @@ public interface MailServerModelRepresentation {
 	public String getPort() ;
 	
 	public void setPort(String port);
+	
+	public ServerType getServerType();
+	
+	public void setServerType(ServerType serverType);
 }

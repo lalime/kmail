@@ -232,14 +232,14 @@ public class SimplePOP3WithSSLMailReader implements MailReader{
             messages = this.folder.getMessages();
         } catch(Exception e) {
             e.printStackTrace();
-            System.exit(-1);
+            return null;
         }
         if(messages == null) return mailsRepresentation;
         for (Message message : messages) {
 			try {
 				SimpleMailBean simpleMailBean = new SimpleMailBean();
 				simpleMailBean.setSendDate(message.getSentDate());
-				simpleMailBean.setAddressFrom(convertAddressToListOfString(message.getFrom()));
+				simpleMailBean.setAddressFrom(message.getFrom()[0].getType());
 				simpleMailBean.setAddressTo(convertAddressToListOfString(message.getAllRecipients()));
 				simpleMailBean.setContentType(message.getContentType());
 				simpleMailBean.setSubject(message.getSubject());

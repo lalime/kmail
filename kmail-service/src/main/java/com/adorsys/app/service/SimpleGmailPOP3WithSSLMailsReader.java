@@ -239,7 +239,7 @@ public class SimpleGmailPOP3WithSSLMailsReader implements MailReader {
 			try {
 				SimpleMailBean simpleMailBean = new SimpleMailBean();
 				simpleMailBean.setSendDate(message.getSentDate());
-				simpleMailBean.setAddressFrom(convertAddressToListOfString(message.getFrom()));
+				simpleMailBean.setAddressFrom(message.getFrom()[0].toString());
 				simpleMailBean.setAddressTo(convertAddressToListOfString(message.getAllRecipients()));
 				simpleMailBean.setContentType(message.getContentType());
 				simpleMailBean.setSubject(message.getSubject());

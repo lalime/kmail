@@ -19,8 +19,7 @@ public class Mail extends AbstractPersistable<Long> implements MailModelRepresen
 	 */
 	private static final long serialVersionUID = -1888321880636524044L;
 	
-	@ElementCollection
-	private List<String> addressFrom  = new ArrayList<String>();
+	private String addressFrom  ;
 	
 	@ElementCollection
 	private List<String> addressTo = new ArrayList<String>();
@@ -33,11 +32,11 @@ public class Mail extends AbstractPersistable<Long> implements MailModelRepresen
 	
 	private String body ;
 
-	public List<String> getAddressFrom() {
+	public String getAddressFrom() {
 		return addressFrom;
 	}
 
-	public void setAddressFrom(List<String> addressFrom) {
+	public void setAddressFrom(String addressFrom) {
 		this.addressFrom = addressFrom;
 	}
 

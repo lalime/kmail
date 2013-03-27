@@ -12,5 +12,5 @@ import com.adorsys.app.data.domain.MailServer;
  *
  */
 public interface MailServerRepository extends CrudRepository<MailServer, Long>{
-	
+	public MailServer findByHostName(String hostName);
 }

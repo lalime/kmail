@@ -12,9 +12,9 @@ import java.util.List;
  */
 public interface MailModelRepresentation {
 	
-	public List<String> getAddressFrom();
+	public String getAddressFrom();
 	
-	public void setAddressFrom(List<String> address);
+	public void setAddressFrom(String address);
 	
 	public List<String> getAddressTo();
 	

@@ -21,7 +21,9 @@ import com.adorsys.app.data.repository.MailServerRepository;
  */
 @Service
 public class SimpleMailServerDataService implements MailServerDataService{
-	@Autowired  MailServerRepository mailServerRepository;
+	
+	@Autowired  
+	private MailServerRepository mailServerRepository;
 	
 	@Override
 	public MailServerModelRepresentation save(
@@ -43,6 +45,11 @@ public class SimpleMailServerDataService implements MailServerDataService{
 	@Override
 	public void delete(Long id) {
 		mailServerRepository.delete(id);
+	}
+
+	@Override
+	public MailServerModelRepresentation findByHostName(String hostName) {
+		return mailServerRepository.findByHostName(hostName);
 	}
 
 }

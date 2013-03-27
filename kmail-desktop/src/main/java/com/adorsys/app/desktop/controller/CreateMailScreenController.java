@@ -140,7 +140,8 @@ public class CreateMailScreenController {
     	
     	LOGGER.info(mail.toString());
     	
-    	MailAccountModelRepresentation mailAccount = KmailApplicationContextUtils.getMailAccountDataService().findByHostName("smtp.gmail.com");
+    	MailAccountModelRepresentation mailAccount = KmailApplicationContextUtils.getMailAccountDataService().findByUserName(mail.getAddressFrom());
+    	
     	if(mailAccount == null){
     		LOGGER.error("No Mail Account Found With that hostName" );
     		return ;
@@ -198,7 +199,7 @@ public class CreateMailScreenController {
 		}
     	
     	Mail mail = new Mail();
-    	mail.setAddressFrom(Arrays.asList(mailFrom));
+    	mail.setAddressFrom(mailFrom);
     	mail.setBody(htmlText);
     	mail.setSubject(subject);
     	mail.setSendDate(new Date());

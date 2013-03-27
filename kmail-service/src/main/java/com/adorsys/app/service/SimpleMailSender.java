@@ -41,7 +41,7 @@ public class SimpleMailSender implements MailSender {
 			simpleEmail.setHostName(this.mailAccount.getMailServer().getHostName());
 			simpleEmail.setSmtpPort(new Integer(this.mailAccount.getMailServer().getPort()));
 			simpleEmail.setAuthenticator(new DefaultAuthenticator(this.mailAccount.getUserName(), this.mailAccount.getPassword()));
-			simpleEmail.setFrom(mail.getAddressFrom().iterator().next());
+			simpleEmail.setFrom(mail.getAddressFrom());
 			simpleEmail.setTo(mail.getAddressTo());
 			simpleEmail.setSubject(mail.getSubject());
 			simpleEmail.setMsg(mail.getBody());

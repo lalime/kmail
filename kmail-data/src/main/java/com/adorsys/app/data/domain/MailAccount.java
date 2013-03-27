@@ -3,7 +3,9 @@
  */
 package com.adorsys.app.data.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -19,10 +21,12 @@ public class MailAccount extends AbstractPersistable<Long> implements MailAccoun
 
 	private static final long serialVersionUID = 4584235331103333321L;
 
+	@Column(unique = true)
 	private String userName ;
 	
 	private String password;
 
+	@ManyToOne
 	private MailServer mailServer;
 	
 	public String getUserName() {
@@ -44,10 +48,14 @@ public class MailAccount extends AbstractPersistable<Long> implements MailAccoun
 	public MailServer getMailServer() {
 		return mailServer;
 	}
+	
+	public void setMailServer(MailServer mailServer) {
+		this.mailServer = mailServer;
+	}
 
 	@Override
 	public void setMailServer(MailServerModelRepresentation mailServer) {
-		this.mailServer = (MailServer) mailServer;
+		setMailServer((MailServer) mailServer);
 	}
 	
 	

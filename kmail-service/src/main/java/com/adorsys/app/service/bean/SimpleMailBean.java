@@ -8,7 +8,7 @@ import com.adorsys.app.api.data.MailModelRepresentation;
 
 public class SimpleMailBean implements MailModelRepresentation{
 	
-	private List<String> addressFrom  = new ArrayList<String>();
+	private String addressFrom  ;
 	
 	private List<String> addressTo = new ArrayList<String>();
 	
@@ -20,11 +20,11 @@ public class SimpleMailBean implements MailModelRepresentation{
 	
 	private String body ;
 
-	public List<String> getAddressFrom() {
+	public String getAddressFrom() {
 		return addressFrom;
 	}
 
-	public void setAddressFrom(List<String> addressFrom) {
+	public void setAddressFrom(String addressFrom) {
 		this.addressFrom = addressFrom;
 	}
 

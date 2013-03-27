@@ -1,14 +1,10 @@
 package com.adorsys.app.desktop.controller;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
@@ -16,6 +12,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -25,8 +22,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.text.Text;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.adorsys.app.api.data.ApplicationUserMailModelRepresentation;
-import com.adorsys.app.api.data.MailModelRepresentation;
 import com.adorsys.app.desktop.KmailApplicationContextUtils;
 import com.adorsys.app.desktop.ViewManager;
 import com.adorsys.app.desktop.model.TableMailModel;
@@ -58,19 +57,25 @@ public class HomeScreenController {
     private TableView<TableMailModel> mailTableView;
     
     @FXML
+    private MenuItem mailAccountMenuItem;
+
+    @FXML
+    private MenuItem mailServerMenuItem;
+    
+    @FXML
     private AnchorPane mainContainer;
 
     @FXML
     private MenuBar menuBar;
 
     @FXML
-    private Menu menuEdit;
-
-    @FXML
     private Menu menuFIle;
 
     @FXML
     private Menu menuHelp;
+
+    @FXML
+    private Menu menuInsert;
 
     @FXML
     private Button newMailBtn;
@@ -86,7 +91,17 @@ public class HomeScreenController {
 
     @FXML
     private Label trashLabel;
+    
 
+
+    @FXML
+    void onMailAccountMenuItemValidation(Event event) {
+    }
+
+    @FXML
+    void onMailServerMenuItemValidation(Event event) {
+    }
+    
     @FXML
     void onMouseEnteredMailLabel(MouseEvent event) {
     	Label lab = (Label) event.getSource();
@@ -147,15 +162,17 @@ public class HomeScreenController {
         assert actionComboBox != null : "fx:id=\"actionComboBox\" was not injected: check your FXML file 'homeScreen.fxml'.";
         assert ellipse != null : "fx:id=\"ellipse\" was not injected: check your FXML file 'homeScreen.fxml'.";
         assert kmailText != null : "fx:id=\"kmailText\" was not injected: check your FXML file 'homeScreen.fxml'.";
+        assert mailAccountMenuItem != null : "fx:id=\"mailAccountMenuItem\" was not injected: check your FXML file 'homeScreen.fxml'.";
+        assert mailServerMenuItem != null : "fx:id=\"mailServerMenuItem\" was not injected: check your FXML file 'homeScreen.fxml'.";
         assert mailDateColumn != null : "fx:id=\"mailActionColumn\" was not injected: check your FXML file 'homeScreen.fxml'.";
         assert mailFromColumn != null : "fx:id=\"mailFromColumn\" was not injected: check your FXML file 'homeScreen.fxml'.";
         assert mailSubjectColumn != null : "fx:id=\"mailSubjectColumn\" was not injected: check your FXML file 'homeScreen.fxml'.";
         assert mailTableView != null : "fx:id=\"mailTableView\" was not injected: check your FXML file 'homeScreen.fxml'.";
         assert mainContainer != null : "fx:id=\"mainContainer\" was not injected: check your FXML file 'homeScreen.fxml'.";
         assert menuBar != null : "fx:id=\"menuBar\" was not injected: check your FXML file 'homeScreen.fxml'.";
-        assert menuEdit != null : "fx:id=\"menuEdit\" was not injected: check your FXML file 'homeScreen.fxml'.";
         assert menuFIle != null : "fx:id=\"menuFIle\" was not injected: check your FXML file 'homeScreen.fxml'.";
         assert menuHelp != null : "fx:id=\"menuHelp\" was not injected: check your FXML file 'homeScreen.fxml'.";
+        assert menuInsert != null : "fx:id=\"menuInsert\" was not injected: check your FXML file 'homeScreen.fxml'.";
         assert newMailBtn != null : "fx:id=\"newMailBtn\" was not injected: check your FXML file 'homeScreen.fxml'.";
         assert receivedMailLabel != null : "fx:id=\"receivedMailLabel\" was not injected: check your FXML file 'homeScreen.fxml'.";
         assert searchField != null : "fx:id=\"searchField\" was not injected: check your FXML file 'homeScreen.fxml'.";

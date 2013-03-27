@@ -44,8 +44,8 @@ public class SimpleMailAccountDataService implements MailAccountDataService {
 	}
 
 	@Override
-	public MailAccountModelRepresentation findByHostName(String hostName) {
-		return mailAccountRepository.findByHostName(hostName);
+	public MailAccountModelRepresentation findByUserName(String userName) {
+		return mailAccountRepository.findByUserName(userName);
 	}
 	
 }

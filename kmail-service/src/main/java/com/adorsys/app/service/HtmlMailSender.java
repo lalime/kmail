@@ -34,7 +34,7 @@ public class HtmlMailSender implements MailSender {
 		try {
 			email.setTo(mail.getAddressTo());
 
-			email.setFrom(mail.getAddressFrom().iterator().next(), null);
+			email.setFrom(mail.getAddressFrom(), null);
 			email.setSubject(mail.getSubject());
 			
 			// set the html message
