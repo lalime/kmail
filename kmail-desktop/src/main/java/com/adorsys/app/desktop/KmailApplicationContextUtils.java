@@ -13,6 +13,7 @@ import com.adorsys.app.api.data.service.ApplicationUserMailAccountDataService;
 import com.adorsys.app.api.data.service.ApplicationUserMailDataService;
 import com.adorsys.app.api.data.service.MailAccountDataService;
 import com.adorsys.app.api.data.service.MailDataService;
+import com.adorsys.app.api.data.service.MailServerDataService;
 import com.adorsys.app.data.domain.ApplicationUser;
 
 /**
@@ -34,6 +35,8 @@ public class KmailApplicationContextUtils {
 	
 	private static MailDataService mailDataService;
 	
+	private static MailServerDataService mailServerDataService;
+	
 	private static boolean kmailApplicatioinContexUtilsInited  = false;
 	
 	private static ApplicationUserModelRepresentation applicationUser;
@@ -54,7 +57,7 @@ public class KmailApplicationContextUtils {
 				appUserMailDataService =  applicationContext.getBean(ApplicationUserMailDataService.class);
 				mailAccountDataService = applicationContext.getBean(MailAccountDataService.class);
 				mailDataService = applicationContext.getBean(MailDataService.class);
-				
+				mailServerDataService = applicationContext.getBean(MailServerDataService.class);
 				kmailApplicatioinContexUtilsInited = true ;
 				
 
@@ -103,6 +106,9 @@ public class KmailApplicationContextUtils {
 	}
 	public static void setApplicationUser(ApplicationUserModelRepresentation applicationUser) {
 		KmailApplicationContextUtils.applicationUser = applicationUser;
+	}
+	public static MailServerDataService getMailServerDataService() {
+		return mailServerDataService;
 	}
 	
 }

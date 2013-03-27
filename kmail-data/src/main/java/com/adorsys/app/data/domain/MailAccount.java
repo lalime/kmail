@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.adorsys.app.api.data.MailAccountModelRepresentation;
+import com.adorsys.app.api.data.MailServerModelRepresentation;
 
 /**
  * @author w2b
@@ -18,40 +19,12 @@ public class MailAccount extends AbstractPersistable<Long> implements MailAccoun
 
 	private static final long serialVersionUID = 4584235331103333321L;
 
-	private String protocol;
-	
-	private String hostName;
-	
-	private String port ;
-	
 	private String userName ;
 	
 	private String password;
 
-	public String getProtocol() {
-		return protocol;
-	}
-
-	public void setProtocol(String protocol) {
-		this.protocol = protocol;
-	}
-
-	public String getHostName() {
-		return hostName;
-	}
-
-	public void setHostName(String url) {
-		this.hostName = url;
-	}
-
-	public String getPort() {
-		return port;
-	}
-
-	public void setPort(String port) {
-		this.port = port;
-	}
-
+	private MailServer mailServer;
+	
 	public String getUserName() {
 		return userName;
 	}
@@ -68,11 +41,14 @@ public class MailAccount extends AbstractPersistable<Long> implements MailAccoun
 		this.password = password;
 	}
 
-	@Override
-	public String toString() {
-		return "MailAccount [protocol=" + protocol + ", url=" + hostName + ", port="
-				+ port + ", userName=" + userName + ", password=" + password
-				+ ", Id=" + getId() + ", isNew=" + isNew() + "]";
+	public MailServer getMailServer() {
+		return mailServer;
 	}
+
+	@Override
+	public void setMailServer(MailServerModelRepresentation mailServer) {
+		this.mailServer = (MailServer) mailServer;
+	}
+	
 	
 }
