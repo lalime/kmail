@@ -21,7 +21,7 @@ public class Mail extends AbstractPersistable<Long> implements MailModelRepresen
 	
 	private String addressFrom  ;
 	
-	@ElementCollection
+	@ElementCollection(targetClass=String.class)
 	private List<String> addressTo = new ArrayList<String>();
 	
 	private String subject ;
@@ -76,7 +76,7 @@ public class Mail extends AbstractPersistable<Long> implements MailModelRepresen
 
 	@Override
 	public String toString() {
-		return "Mail [addressFrom=" + addressFrom + ", addressTo=" + addressTo
+		return "Mail [Id = "+getId()+", addressFrom=" + addressFrom + ", addressTo=" + addressTo
 				+ ", subject=" + subject + ", sendDate=" + sendDate
 				+ ", contentType=" + contentType + ", body=" + body + "]";
 	}

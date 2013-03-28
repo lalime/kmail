@@ -12,7 +12,7 @@ import com.adorsys.app.api.data.MailModelRepresentation;
  *
  */
 public interface MailDataService {
-	public void save(MailModelRepresentation mailModelRepresentation);
+	public MailModelRepresentation save(MailModelRepresentation mailModelRepresentation);
 	public MailModelRepresentation findOne(Long id);
 	public List<MailModelRepresentation> findAll();
 	public void delete(Long id);

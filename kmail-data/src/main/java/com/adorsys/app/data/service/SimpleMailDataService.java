@@ -25,8 +25,8 @@ public class SimpleMailDataService implements MailDataService {
 	private MailRepository mailDataService;
 
 	@Override
-	public void save(MailModelRepresentation mailModelRepresentation) {
-		mailDataService.save((Mail)mailModelRepresentation);
+	public Mail save(MailModelRepresentation mailModelRepresentation) {
+		return mailDataService.save((Mail)mailModelRepresentation);
 	}
 
 	@Override

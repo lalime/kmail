@@ -6,6 +6,9 @@ package com.adorsys.app.data.domain;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -28,10 +31,13 @@ public class AppUserMail extends AbstractPersistable<Long> implements Applicatio
 	 */
 	private static final long serialVersionUID = -2487525761297456275L;
 	
+	@ManyToOne
 	private MailAccount mailAccount ;
 	
+	@ManyToOne
 	private ApplicationUser applicationUser ;
 	
+	@OneToOne
 	private Mail mail ;
 	
 	private Date storingDate;

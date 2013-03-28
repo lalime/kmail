@@ -87,14 +87,14 @@ public class CreateMailScreenController {
 	}
 
 	private void saveInDraft(MailModelRepresentation mailInEdition,MailAccountModelRepresentation mailAccount) {
-		KmailApplicationContextUtils.getMailDataService().save(mailInEdition);
+		MailModelRepresentation savedMailModel = KmailApplicationContextUtils.getMailDataService().save(mailInEdition);
 		AppUserMail appUserMail = new AppUserMail();
 		appUserMail.setApplicationUser(KmailApplicationContextUtils.getApplicationUser());
 		appUserMail.setMail((Mail)mailInEdition);
 		appUserMail.setMail(mailInEdition);
 		appUserMail.setViewState(ViewState.READED);
 		appUserMail.setEditionState(EditionState.IN_DRAFT);
-		//appUserMail.setMail(mailInEdition);
+		appUserMail.setMail((Mail)savedMailModel);
 		KmailApplicationContextUtils.getAppUserMailDataService().save(appUserMail);
 	}
 
@@ -158,7 +158,7 @@ public class CreateMailScreenController {
     			updateMail(mail);
     		}
     	}catch(Exception exception){
-    		LOGGER.error(exception.getMessage(),exception);
+    		LOGGER.error("Error Occurred : "+exception.getMessage(),exception);
     		saveInDraft(mail, mailAccount);
     		//show the error screen
 //    		ViewManager.getViewManager().showErrorScreen(exception.getMessage());
