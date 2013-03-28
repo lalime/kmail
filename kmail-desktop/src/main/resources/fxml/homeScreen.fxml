@@ -33,8 +33,8 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Insert" fx:id="menuInsert">
           <items>
-            <MenuItem mnemonicParsing="false" onMenuValidation="#onMailAccountMenuItemValidation" text="Mail Account" fx:id="mailAccountMenuItem" />
-            <MenuItem mnemonicParsing="false" onMenuValidation="#onMailServerMenuItemValidation" text="Mail Server" fx:id="mailServerMenuItem" />
+            <MenuItem mnemonicParsing="false" onAction="#onMailAccountMenuItemValidation" text="Mail Account" fx:id="mailAccountMenuItem" />
+            <MenuItem mnemonicParsing="false" onAction="#onMailServerMenuItemValidation" text="Mail Server" fx:id="mailServerMenuItem" />
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help" fx:id="menuHelp">

@@ -96,10 +96,13 @@ public class HomeScreenController {
 
     @FXML
     void onMailAccountMenuItemValidation(Event event) {
+    	LOGGER.info("Create New Mail Account");
+    	ViewManager.getViewManager().showCreateMailAccountScreen();
     }
 
     @FXML
     void onMailServerMenuItemValidation(Event event) {
+    	ViewManager.getViewManager().showCreateNewMailServerScreen();
     }
     
     @FXML

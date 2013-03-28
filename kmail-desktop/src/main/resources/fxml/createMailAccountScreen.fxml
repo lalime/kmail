@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+
+<AnchorPane id="AnchorPane" fx:id="newMailAccountScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="203.0" prefWidth="475.0" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adorsys.app.desktop.controller.CreateMailAccountScreenController">
+  <children>
+    <Label layoutX="147.0" layoutY="18.0" text="User Name/ Email" />
+    <TextField id="portTextField" fx:id="userNameTextField" layoutX="266.0" layoutY="12.0" prefWidth="200.0" />
+    <Label layoutX="147.0" layoutY="44.0" text="Password" />
+    <PasswordField id="passowordTextField" fx:id="passwordTextField" layoutX="266.0" layoutY="38.0" prefWidth="200.0" />
+    <Label layoutX="147.0" layoutY="73.0" text="Confirm" />
+    <PasswordField fx:id="confirmPasswordTextField" layoutX="266.0" layoutY="67.0" prefWidth="200.0" />
+    <Label layoutX="147.0" layoutY="102.0" text="Mail Server" />
+    <ComboBox id="serverTypeTextField" fx:id="mailServerComboBox" layoutX="266.0" layoutY="96.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="199.0">
+      <items>
+        <FXCollections fx:factory="observableArrayList" />
+      </items>
+    </ComboBox>
+    <Separator layoutX="148.0" layoutY="148.0" prefWidth="319.0" />
+    <Button fx:id="saveButton" layoutX="194.0" layoutY="171.0" mnemonicParsing="false" onMouseClicked="#onSaveButtonClicked" text="Save" />
+    <Button fx:id="cancelButton" layoutX="266.0" layoutY="171.0" mnemonicParsing="false" onMouseClicked="#onCancelButtonClicked" text="Cancel" />
+  </children>
+</AnchorPane>

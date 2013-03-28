@@ -66,5 +66,12 @@ public class MailServer extends AbstractPersistable<Long> implements MailServerM
 	public void setServerType(ServerType serverType) {
 		this.serverType = serverType;
 	}
+
+	@Override
+	public String toString() {
+		return "MailServer [protocol=" + protocol + ", hostName=" + hostName
+				+ ", port=" + port + ", serverType=" + serverType + "]";
+	}
+	
 	
 }

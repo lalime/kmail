@@ -12,6 +12,7 @@ import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -23,8 +24,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.adorsys.app.api.data.ApplicationUserMailModelRepresentation;
+import com.adorsys.app.api.data.MailAccountModelRepresentation;
 import com.adorsys.app.api.data.MailModelRepresentation;
+import com.adorsys.app.api.data.MailServerModelRepresentation;
+import com.adorsys.app.data.domain.MailAccount;
+import com.adorsys.app.data.domain.MailServer;
+import com.adorsys.app.desktop.controller.TableAccountModel;
 import com.adorsys.app.desktop.model.TableMailModel;
+import com.adorsys.app.desktop.model.TableServerModel;
 
 /**
  * @author w2b
@@ -37,16 +44,21 @@ public class ViewManager {
 	
 	private final String HOME_SCREEN_PAGE_NAME = "/fxml/homeScreen.fxml";
 	private final String LOGIN_SCREEN_NAME = "/fxml/loginScreen.fxml";
-	
 	private final String CREATE_MAIL_SCREEN = "/fxml/createMailScreen.fxml";
+	private final String CREATE_MAIL_SERVER_SCREEN_NAME = "/fxml/createMailServerScreen.fxml";
+	private final String CREATE_MAIL_ACCOUNT_SCREEN = "/fxml/createMailAccountScreen.fxml";
 	
 	private static ViewManager viewManager ;
 	
 	private VBox homeScreen ;
 	private AnchorPane createMailScreen;
 	private Parent loginScreen ;
-	
+	private AnchorPane createNewMailScreen ;
 	private AnchorPane mainScreenAnchorPane ;
+	private AnchorPane createMailAccountScreen;
+    private ComboBox<MailServerModelRepresentation> mailServerComboBox;
+	
+	
 	private ViewManager(){
 		
 	}
@@ -71,6 +83,12 @@ public class ViewManager {
 
 		LOGGER.debug("Loading FXML for Login view from : {}",viewManager.CREATE_MAIL_SCREEN);
 		viewManager.createMailScreen = FXMLLoader.load(ViewManager.class.getResource(viewManager.CREATE_MAIL_SCREEN));
+		
+		LOGGER.debug("Loading FXML for Login view from : {}",viewManager.CREATE_MAIL_SERVER_SCREEN_NAME);
+		viewManager.createNewMailScreen = FXMLLoader.load(ViewManager.class.getResource(viewManager.CREATE_MAIL_SERVER_SCREEN_NAME));
+
+		LOGGER.debug("Loading FXML for Login view from : {}",viewManager.CREATE_MAIL_ACCOUNT_SCREEN);
+		viewManager.createMailAccountScreen = FXMLLoader.load(ViewManager.class.getResource(viewManager.CREATE_MAIL_ACCOUNT_SCREEN));
 	}
 	
 	public void showHomepage() {
@@ -86,12 +104,10 @@ public class ViewManager {
 	}
 	
 	public void showCreateMailScreen(){
-		viewManager.mainScreenAnchorPane.getChildren().clear();
 		LOGGER.info(viewManager.mainScreenAnchorPane.toString());
 		viewManager.createMailScreen.setPrefHeight(viewManager.mainScreenAnchorPane.getPrefHeight());
 		viewManager.createMailScreen.setPrefWidth(viewManager.mainScreenAnchorPane.getPrefWidth());
-		viewManager.mainScreenAnchorPane.getChildren().add(viewManager.createMailScreen);
-		viewManager.createMailScreen.autosize();
+		replaceMainScreenContain(viewManager.createMailScreen);
 	}
 	
 	public void showMailList(List<ApplicationUserMailModelRepresentation> data){
@@ -107,11 +123,6 @@ public class ViewManager {
 		mailDateColumn.setCellValueFactory(new PropertyValueFactory<TableMailModel, String>("date"));
 		
 		mailTableView.getColumns().addAll(mailFromColumn,	mailSubjectColumn,mailDateColumn);
-		mailTableView.setPrefHeight(200);
-		mailTableView.setPrefWidth(600);
-		mailTableView.setMaxHeight(Double.MAX_VALUE);
-		mailTableView.setMaxWidth(Double.MAX_VALUE);
-		mailTableView.autosize();
 		if(data == null || data.isEmpty()){
 			mailTableView.getItems().add(new TableMailModel("boris.waguia@adorsys.com", "welcome to kmail", new Date().toString()));			
 		}else {
@@ -119,7 +130,60 @@ public class ViewManager {
 		}
 		showList(mailTableView );
 	}
-
+	
+	public void showMailServerList(List<MailServerModelRepresentation> mailServers) {
+		TableView<TableServerModel> serverTableViews = new TableView<TableServerModel>();
+		TableColumn<TableServerModel, String> idColumn = new TableColumn<TableServerModel, String>("No");
+		TableColumn<TableServerModel, String> protocolColumn = new TableColumn<TableServerModel, String>("Protocol");
+		TableColumn<TableServerModel, String> hostNameColumn = new TableColumn<TableServerModel, String>("Host Name");
+		TableColumn<TableServerModel, String> portColumn= new TableColumn<TableServerModel, String>("Port");
+		
+		idColumn.setCellValueFactory(new PropertyValueFactory<TableServerModel, String>("id"));
+		protocolColumn.setCellValueFactory(new PropertyValueFactory<TableServerModel, String>("protocol"));
+		hostNameColumn.setCellValueFactory(new PropertyValueFactory<TableServerModel, String>("hostName"));
+		portColumn.setCellValueFactory(new PropertyValueFactory<TableServerModel, String>("port"));
+		
+		serverTableViews.getColumns().addAll(idColumn,protocolColumn,hostNameColumn,portColumn);
+		if(mailServers == null ||  mailServers.isEmpty()){
+			serverTableViews.getItems().add(new TableServerModel(new Long(0),"pop3", "pop.gmail.com", "995"));
+		}else {
+			serverTableViews.getItems().addAll(convertToServerMailModel(mailServers));
+		}
+		showList(serverTableViews );
+	}
+	
+	public void showCreateNewMailServerScreen(){
+    	LOGGER.info("Create New Mail Server.");
+		replaceMainScreenContain(viewManager.createNewMailScreen);
+	}
+	private void replaceMainScreenContain(AnchorPane anchorPane) {
+		viewManager.mainScreenAnchorPane.getChildren().clear();
+		viewManager.mainScreenAnchorPane.getChildren().add(anchorPane);
+		anchorPane.autosize();
+	}
+	
+	public void showCreateMailAccountScreen(){
+		LOGGER.info("Create a new mail Account");
+		List<MailServerModelRepresentation> allMailServers = KmailApplicationContextUtils.getMailServerDataService().findAll();
+		if(allMailServers != null)viewManager.mailServerComboBox.getItems().addAll(allMailServers);
+		replaceMainScreenContain(viewManager.createMailAccountScreen);
+	}
+	public void showMailAccountList(List<MailAccountModelRepresentation> mailAccounts){
+		TableView<TableAccountModel> mailAccountTableView = new TableView<TableAccountModel>();
+		
+		TableColumn<TableAccountModel,String> idColumn = new TableColumn<TableAccountModel, String>("No");
+		TableColumn<TableAccountModel, String> userNameColumn = new TableColumn<TableAccountModel, String>("User Name");
+		TableColumn<TableAccountModel, String> mailServerColumn = new TableColumn<TableAccountModel, String>("Mail Server");
+		
+		idColumn.setCellValueFactory(new PropertyValueFactory<TableAccountModel, String>("id"));
+		userNameColumn.setCellValueFactory(new PropertyValueFactory<TableAccountModel, String>("userName"));
+		mailServerColumn.setCellValueFactory(new PropertyValueFactory<TableAccountModel, String>("mailServer"));
+		
+		mailAccountTableView.getColumns().addAll(idColumn,userNameColumn,mailServerColumn);
+		
+		mailAccountTableView.getItems().addAll(convertToMailAccountModel(mailAccounts));
+		showList(mailAccountTableView);
+	}
 	private Collection<TableMailModel> convertToTableMailModels(List<ApplicationUserMailModelRepresentation> receivedMails) {
 		Collection<TableMailModel> data = new ArrayList<TableMailModel>();
     	for (ApplicationUserMailModelRepresentation appUserMail : receivedMails) {
@@ -127,6 +191,22 @@ public class ViewManager {
 			data.add(new TableMailModel(mail.getAddressFrom().toString(), mail.getSubject(),mail.getSendDate().toString()));
 		}
 		return data;
+	}
+	private Collection<TableServerModel> convertToServerMailModel(List<MailServerModelRepresentation> dataToConvert){
+		Collection<TableServerModel> convertedData = new ArrayList<TableServerModel>();
+		for (MailServerModelRepresentation mailServerM : dataToConvert) {
+			MailServer mailServer = (MailServer) mailServerM;
+			convertedData.add(new TableServerModel(mailServer.getId(),mailServer.getProtocol(), mailServer.getHostName(), mailServer.getPort()));
+		}
+		return convertedData;
+	}
+	private Collection<TableAccountModel> convertToMailAccountModel(List<MailAccountModelRepresentation> dataToConvert){
+		Collection<TableAccountModel> convertedData = new ArrayList<TableAccountModel>();
+		for (MailAccountModelRepresentation mailAccountM : dataToConvert) {
+			MailAccount mailAccount = (MailAccount) mailAccountM;
+			convertedData.add(new TableAccountModel(mailAccount.getId(), mailAccount.getUserName(), mailAccount.getMailServer()));
+		}
+		return convertedData;
 	}
 	private void showScene(Scene scene,String stageTitle){
 		getStage().setScene(scene);
@@ -143,10 +223,19 @@ public class ViewManager {
 		if(anchorPane == null || viewManager == null) throw new IllegalArgumentException("Null value is not required");
 		viewManager.mainScreenAnchorPane = anchorPane;
 	}
-	
+	public static void setMailServerComboBox(ComboBox<MailServerModelRepresentation> comboBox){
+		if(comboBox == null) throw new IllegalArgumentException("The Combobox Is Required !");
+		viewManager.mailServerComboBox = comboBox;
+	}
 	private <T> void showList(TableView<T> tableView){
+		tableView.setPrefHeight(200);
+		tableView.setPrefWidth(600);
+		tableView.setMaxHeight(Double.MAX_VALUE);
+		tableView.setMaxWidth(Double.MAX_VALUE);
+		tableView.autosize();
 		viewManager.mainScreenAnchorPane.getChildren().clear();
 		viewManager.mainScreenAnchorPane.getChildren().add(tableView);
 	}
 	
 }
+

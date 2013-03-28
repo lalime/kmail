@@ -57,6 +57,11 @@ public class MailAccount extends AbstractPersistable<Long> implements MailAccoun
 	public void setMailServer(MailServerModelRepresentation mailServer) {
 		setMailServer((MailServer) mailServer);
 	}
-	
+
+	@Override
+	public String toString() {
+		return "MailAccount [userName=" + userName + ", password=" + password
+				+ ", mailServer=" + mailServer.getId() + "-"+mailServer.getHostName()+"]";
+	}
 	
 }
