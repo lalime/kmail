@@ -11,9 +11,9 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class TableServerModel {
 	private SimpleStringProperty id = new SimpleStringProperty();
-	private SimpleStringProperty protocol =  new SimpleStringProperty();
-	private SimpleStringProperty hostName = new SimpleStringProperty() ;
 	private SimpleStringProperty port = new SimpleStringProperty();
+	private SimpleStringProperty hostName = new SimpleStringProperty() ;
+	private SimpleStringProperty protocol =  new SimpleStringProperty();
 	
 	public TableServerModel(Long id,String protocol,String hostName,String port){
 		super();

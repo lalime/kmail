@@ -3,18 +3,17 @@ package com.adorsys.app.desktop.controller;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import com.adorsys.app.api.data.ServerType;
-import com.adorsys.app.data.domain.MailServer;
-import com.adorsys.app.desktop.KmailApplicationContextUtils;
-import com.adorsys.app.desktop.ViewManager;
-
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+
+import com.adorsys.app.api.data.Protocol;
+import com.adorsys.app.data.domain.MailServer;
+import com.adorsys.app.desktop.KmailApplicationContextUtils;
+import com.adorsys.app.desktop.ViewManager;
 
 /**
  * 
@@ -42,13 +41,13 @@ public class CreateMailServerScreenController {
     private TextField portTextField;
 
     @FXML
-    private TextField protocolTextField;
+    private ComboBox<Protocol> protocolTextField;
 
     @FXML
     private Button saveButton;
-
+/*
     @FXML
-    private ComboBox<ServerType> serverTypeTextField;
+    private ComboBox<Protocol> serverTypeTextField;*/
 
 
     @FXML
@@ -61,8 +60,7 @@ public class CreateMailServerScreenController {
     	MailServer mailServer = new MailServer();
     	mailServer.setHostName(hostNameTextField.getText());
     	mailServer.setPort(portTextField.getText());
-    	mailServer.setProtocol(protocolTextField.getText());
-    	mailServer.setServerType(serverTypeTextField.getValue());
+    	mailServer.setProtocol(protocolTextField.getValue());
     	return mailServer;
     }
     @FXML
@@ -81,9 +79,7 @@ public class CreateMailServerScreenController {
         assert portTextField != null : "fx:id=\"portTextField\" was not injected: check your FXML file 'createMailServer.fxml'.";
         assert protocolTextField != null : "fx:id=\"protocolTextField\" was not injected: check your FXML file 'createMailServer.fxml'.";
         assert saveButton != null : "fx:id=\"saveButton\" was not injected: check your FXML file 'createMailServer.fxml'.";
-        assert serverTypeTextField != null : "fx:id=\"serverTypeTextField\" was not injected: check your FXML file 'createMailServer.fxml'.";
-        
-        serverTypeTextField.getItems().addAll(ServerType.IMAP,ServerType.POP3,ServerType.SMTP);
+        protocolTextField.getItems().addAll(Protocol.IMAP,Protocol.POP3,Protocol.SMTP);
     }
 
 }

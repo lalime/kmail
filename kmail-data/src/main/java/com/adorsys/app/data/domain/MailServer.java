@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.adorsys.app.api.data.MailServerModelRepresentation;
-import com.adorsys.app.api.data.ServerType;
+import com.adorsys.app.api.data.Protocol;
 
 /**
  * @author w2b
@@ -23,21 +23,20 @@ public class MailServer extends AbstractPersistable<Long> implements MailServerM
 	 */
 	private static final long serialVersionUID = 5106523413753201651L;
 
-	private String protocol;
+
+	private String port ;
 	
 	@Column(unique=true)
 	private String hostName;
-	
-	private String port ;
 
-	private ServerType serverType;
+	private Protocol protocol;
+
 	
-	
-	public String getProtocol() {
+	public Protocol getProtocol() {
 		return protocol;
 	}
 
-	public void setProtocol(String protocol) {
+	public void setProtocol(Protocol protocol) {
 		this.protocol = protocol;
 	}
 
@@ -58,19 +57,9 @@ public class MailServer extends AbstractPersistable<Long> implements MailServerM
 	}
 
 	@Override
-	public ServerType getServerType() {
-		return this.serverType;
-	}
-
-	@Override
-	public void setServerType(ServerType serverType) {
-		this.serverType = serverType;
-	}
-
-	@Override
 	public String toString() {
 		return "MailServer [protocol=" + protocol + ", hostName=" + hostName
-				+ ", port=" + port + ", serverType=" + serverType + "]";
+				+ ", port=" + port + "]";
 	}
 	
 	
