@@ -29,6 +29,7 @@ import com.adorsys.app.api.data.MailModelRepresentation;
 import com.adorsys.app.api.data.MailServerModelRepresentation;
 import com.adorsys.app.data.domain.MailAccount;
 import com.adorsys.app.data.domain.MailServer;
+import com.adorsys.app.desktop.controller.CreateMailScreenController;
 import com.adorsys.app.desktop.controller.TableAccountModel;
 import com.adorsys.app.desktop.model.TableMailModel;
 import com.adorsys.app.desktop.model.TableServerModel;
@@ -105,6 +106,7 @@ public class ViewManager {
 	
 	public void showCreateMailScreen(){
 		LOGGER.info(viewManager.mainScreenAnchorPane.toString());
+		CreateMailScreenController.updateMailAccountList(KmailApplicationContextUtils.getMailAccountDataService().findAll());
 		viewManager.createMailScreen.setPrefHeight(viewManager.mainScreenAnchorPane.getPrefHeight());
 		viewManager.createMailScreen.setPrefWidth(viewManager.mainScreenAnchorPane.getPrefWidth());
 		replaceMainScreenContain(viewManager.createMailScreen);

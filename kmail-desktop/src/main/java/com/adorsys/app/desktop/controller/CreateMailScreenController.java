@@ -2,7 +2,7 @@ package com.adorsys.app.desktop.controller;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -54,7 +54,7 @@ public class CreateMailScreenController {
     private HTMLEditor mailEditor;
 
     @FXML
-    private ComboBox<String> mailFromComboBox;
+    private static ComboBox<String> mailFromComboBox;
 
     @FXML
     private TextField mailToField;
@@ -186,7 +186,7 @@ public class CreateMailScreenController {
 	}
 
 	private Mail getMailInEdition() {
-		String mailFrom = mailFromComboBox.getSelectionModel().getSelectedItem();
+		String mailFrom =  mailFromComboBox.getSelectionModel().getSelectedItem();
     	String mailTo = mailToField.getText();
     	String mailsInCC = ccField.getText();
     	String subject = subjectField.getText();
@@ -218,9 +218,13 @@ public class CreateMailScreenController {
         assert newMailScreen != null : "fx:id=\"newMailScreen\" was not injected: check your FXML file 'createMailScreen.fxml'.";
         assert sendButton != null : "fx:id=\"sendButton\" was not injected: check your FXML file 'createMailScreen.fxml'.";
         assert subjectField != null : "fx:id=\"subjectField\" was not injected: check your FXML file 'createMailScreen.fxml'.";
-
-
-        this.mailFromComboBox.getItems().clear();
-        this.mailFromComboBox.getItems().addAll(Arrays.asList("","boris.waguia@adorsys.com","b.waguia@gmail.com"));
+        
+        CreateMailScreenController.updateMailAccountList(KmailApplicationContextUtils.getMailAccountDataService().findAll());
+    }
+    public static void updateMailAccountList(Collection<MailAccountModelRepresentation> mailAccounts){
+    	CreateMailScreenController.mailFromComboBox.getItems().clear();
+    	for (MailAccountModelRepresentation mailAccountModelRepresentation : mailAccounts) {
+    		CreateMailScreenController.mailFromComboBox.getItems().add(mailAccountModelRepresentation.getUserName());			
+		}
     }
 }

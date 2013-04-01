@@ -79,6 +79,8 @@ public class CreateMailServerScreenController {
         assert portTextField != null : "fx:id=\"portTextField\" was not injected: check your FXML file 'createMailServer.fxml'.";
         assert protocolTextField != null : "fx:id=\"protocolTextField\" was not injected: check your FXML file 'createMailServer.fxml'.";
         assert saveButton != null : "fx:id=\"saveButton\" was not injected: check your FXML file 'createMailServer.fxml'.";
+        
+        protocolTextField.getItems().clear();
         protocolTextField.getItems().addAll(Protocol.IMAP,Protocol.POP3,Protocol.SMTP);
     }
 
