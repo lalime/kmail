@@ -61,7 +61,7 @@ public class MailAccount extends AbstractPersistable<Long> implements MailAccoun
 	@Override
 	public String toString() {
 		return "MailAccount [userName=" + userName + ", password=" + password
-				+ ", mailServer=" + mailServer.getId() + "-"+mailServer.getHostName()+"]";
+				+ ", mailServer=" + mailServer.getId() + "-"+mailServer.getSendingHostName()+" / "+mailServer.getReceivingHostName()+"]";
 	}
 	
 }

@@ -24,7 +24,10 @@ public class MailServer extends AbstractPersistable<Long> implements MailServerM
 	private static final long serialVersionUID = 5106523413753201651L;
 
 	@Column(unique=true)
-	private String hostName;
+	private String sendingHostName;
+
+	@Column(unique=true)
+	private String receivingHostName;
 
 	private String sendingPort;
 	
@@ -34,13 +37,21 @@ public class MailServer extends AbstractPersistable<Long> implements MailServerM
 	private String receivingPort ;
 	
 	private Protocol receivingProtocol ;
-
-	public String getHostName() {
-		return hostName;
+	
+	public String getSendingHostName() {
+		return sendingHostName;
 	}
 
-	public void setHostName(String hostName) {
-		this.hostName = hostName;
+	public void setSendingHostName(String sendingHostName) {
+		this.sendingHostName = sendingHostName;
+	}
+
+	public String getReceivingHostName() {
+		return receivingHostName;
+	}
+
+	public void setReceivingHostName(String receivingHostName) {
+		this.receivingHostName = receivingHostName;
 	}
 
 	public String getSendingPort() {
@@ -74,7 +85,15 @@ public class MailServer extends AbstractPersistable<Long> implements MailServerM
 	public void setReceivingProtocol(Protocol receivingProtocol) {
 		this.receivingProtocol = receivingProtocol;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "MailServer [sendingHostName=" + sendingHostName
+				+ ", receivingHostName=" + receivingHostName + ", sendingPort="
+				+ sendingPort + ", sendingProtocol=" + sendingProtocol
+				+ ", receivingPort=" + receivingPort + ", receivingProtocol="
+				+ receivingProtocol + "]";
+	}
 	
 	
 }

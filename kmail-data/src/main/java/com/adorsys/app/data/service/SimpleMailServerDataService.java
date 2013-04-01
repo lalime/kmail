@@ -48,8 +48,13 @@ public class SimpleMailServerDataService implements MailServerDataService{
 	}
 
 	@Override
-	public MailServerModelRepresentation findByHostName(String hostName) {
-		return mailServerRepository.findByHostName(hostName);
+	public MailServerModelRepresentation findBySendingHostName(String hostName) {
+		return mailServerRepository.findBySendingHostName(hostName);
+	}
+
+	@Override
+	public MailServerModelRepresentation findByReceivingHostName(String hostName) {
+		return mailServerRepository.findByReceivingHostName(hostName);
 	}
 
 }

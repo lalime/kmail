@@ -201,7 +201,7 @@ public class ViewManager {
 		Collection<TableServerModel> convertedData = new ArrayList<TableServerModel>();
 		for (MailServerModelRepresentation mailServerM : dataToConvert) {
 			MailServer mailServer = (MailServer) mailServerM;
-			convertedData.add(new TableServerModel(mailServer.getId(),mailServer.getSendingProtocol().toString(), mailServer.getHostName(), mailServer.getSendingPort()));
+			convertedData.add(new TableServerModel(mailServer.getId(),mailServer.getSendingProtocol().toString(), mailServer.getSendingHostName(), mailServer.getSendingPort()));
 		}
 		return convertedData;
 	}

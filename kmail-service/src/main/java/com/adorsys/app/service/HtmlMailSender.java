@@ -36,7 +36,7 @@ public class HtmlMailSender implements MailSender {
 		// Create the email message
 		HtmlEmail email = new HtmlEmail();
 		try {
-			email.setHostName(mailAccount.getMailServer().getHostName());
+			email.setHostName(mailAccount.getMailServer().getSendingHostName());
 			for (String destinator : mail.getAddressTo()) {
 				email.addTo(destinator);
 			}

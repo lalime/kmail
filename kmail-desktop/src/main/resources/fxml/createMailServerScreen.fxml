@@ -7,28 +7,30 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 
-<AnchorPane id="AnchorPane" fx:id="newMailServerScreen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="212.0" prefWidth="430.9999000000025" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adorsys.app.desktop.controller.CreateMailServerScreenController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="239.0" prefWidth="488.9999000000025" xmlns:fx="http://javafx.com/fxml" fx:controller="com.adorsys.app.desktop.controller.CreateMailServerScreenController">
   <children>
-    <Label layoutX="104.0" layoutY="55.0" text="Sending Port" />
-    <TextField id="portTextField" fx:id="sendingPortTextfield" layoutX="223.0" layoutY="49.0" prefWidth="200.0" />
-    <Label layoutX="104.0" layoutY="14.0" text="Host Name" />
-    <TextField id="hostNameTextField" fx:id="hostNameTextfield" layoutX="223.0" layoutY="8.0" prefWidth="200.0" />
-    <Label layoutX="104.0" layoutY="83.0" text="Sending Protocol" />
-    <Separator layoutX="104.0" layoutY="169.0" prefWidth="319.0" />
-    <Button fx:id="saveButton" layoutX="150.0" layoutY="188.0" mnemonicParsing="false" onMouseClicked="#onSaveButtonClicked" text="Save" />
-    <Button fx:id="cancelButton" layoutX="222.0" layoutY="188.0" mnemonicParsing="false" onMouseClicked="#onCancelButtonClicked" text="Cancel" />
-    <ComboBox id="protocolTextField" fx:id="sendingProtocolTextfield" layoutX="224.0" layoutY="74.0" prefWidth="200.0">
+    <Label layoutX="60.0" layoutY="14.0" text="Sending Host Name" />
+    <TextField id="sendingHostnameTextfield" fx:id="sendingHostNameTextField" layoutX="59.0" layoutY="33.0" prefWidth="200.0" />
+    <Label layoutX="275.0" layoutY="14.0" text="Receiving Host Name" />
+    <TextField fx:id="receivingHostNameTextField" layoutX="275.0" layoutY="33.0" prefWidth="200.0" />
+    <Label layoutX="59.0" layoutY="60.0" text="Sending Port" />
+    <TextField id="portTextField" fx:id="sendingPortTextfield" layoutX="59.0" layoutY="76.0" prefWidth="200.0" />
+    <Label layoutX="275.0" layoutY="60.0" text="Receiving Port" />
+    <TextField id="portTextField" fx:id="receivingPortTextfield" layoutX="275.0" layoutY="76.0" prefWidth="200.0" />
+    <Label layoutX="60.0" layoutY="103.0" text="Sending Protocol" />
+    <ComboBox id="protocolTextField" fx:id="sendingProtocolTextfield" layoutX="60.0" layoutY="122.0" prefWidth="200.0">
       <items>
         <FXCollections fx:factory="observableArrayList" />
       </items>
     </ComboBox>
-    <Label layoutX="104.0" layoutY="114.0" text="Receiving Port" />
-    <TextField id="portTextField" fx:id="receivingPortTextfield" layoutX="223.0" layoutY="108.0" prefWidth="200.0" />
-    <Label layoutX="104.0" layoutY="142.0" text="Receiving Protocol" />
-    <ComboBox id="protocolTextField" fx:id="receivingProtocolTexfield" layoutX="224.0" layoutY="133.0" prefWidth="200.0">
+    <Label layoutX="275.0" layoutY="104.0" text="Receiving Protocol" />
+    <ComboBox id="protocolTextField" fx:id="receivingProtocolTexfield" layoutX="275.0" layoutY="122.0" prefWidth="200.0">
       <items>
         <FXCollections fx:factory="observableArrayList" />
       </items>
     </ComboBox>
+    <Separator layoutX="60.0" layoutY="169.0" prefWidth="414.9998779296875" />
+    <Button fx:id="saveButton" layoutX="177.0" layoutY="196.0" mnemonicParsing="false" onMouseClicked="#onSaveButtonClicked" text="Save" />
+    <Button fx:id="cancelButton" layoutX="260.0" layoutY="196.0" mnemonicParsing="false" onMouseClicked="#onCancelButtonClicked" text="Cancel" />
   </children>
 </AnchorPane>

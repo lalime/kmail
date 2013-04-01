@@ -15,6 +15,7 @@ public interface MailServerDataService {
 	public MailServerModelRepresentation save(MailServerModelRepresentation mailServerModel);
 	public List<MailServerModelRepresentation> findAll();
 	public void delete(Long id);
-	public MailServerModelRepresentation findByHostName(String hostName);
+	public MailServerModelRepresentation findBySendingHostName(String hostName);
+	public MailServerModelRepresentation findByReceivingHostName(String hostName);
 	
 }
