@@ -32,7 +32,7 @@ public class CreateMailServerScreenController {
     private Button cancelButton;
 
     @FXML
-    private TextField hostNameTextField;
+    private TextField hostNameTextfield;
 
     @FXML
     private AnchorPane newMailServerScreen;
@@ -66,7 +66,7 @@ public class CreateMailServerScreenController {
     
     private MailServer getMailServer(){
     	MailServer mailServer = new MailServer();
-    	mailServer.setHostName(hostNameTextField.getText());
+    	mailServer.setHostName(hostNameTextfield.getText());
     	mailServer.setReceivingPort(receivingPortTextfield.getText());
     	mailServer.setReceivingProtocol(receivingProtocolTexfield.getValue() );
     	mailServer.setSendingPort(sendingPortTextfield.getText());
@@ -83,20 +83,21 @@ public class CreateMailServerScreenController {
 
     @FXML
     void initialize() {
-        assert cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML file 'createMailServer.fxml'.";
-        assert hostNameTextField != null : "fx:id=\"hostNameTextField\" was not injected: check your FXML file 'createMailServer.fxml'.";
-        assert newMailServerScreen != null : "fx:id=\"newMailServerScreen\" was not injected: check your FXML file 'createMailServer.fxml'.";
-        assert saveButton != null : "fx:id=\"saveButton\" was not injected: check your FXML file 'createMailServer.fxml'.";
-        
+    	assert cancelButton != null : "fx:id=\"cancelButton\" was not injected: check your FXML file 'createMailServerScreen.fxml'.";
+        assert hostNameTextfield != null : "fx:id=\"hostNameTextfield\" was not injected: check your FXML file 'createMailServerScreen.fxml'.";
+        assert newMailServerScreen != null : "fx:id=\"newMailServerScreen\" was not injected: check your FXML file 'createMailServerScreen.fxml'.";
         assert receivingPortTextfield != null : "fx:id=\"receivingPortTextfield\" was not injected: check your FXML file 'createMailServerScreen.fxml'.";
         assert receivingProtocolTexfield != null : "fx:id=\"receivingProtocolTexfield\" was not injected: check your FXML file 'createMailServerScreen.fxml'.";
+        assert saveButton != null : "fx:id=\"saveButton\" was not injected: check your FXML file 'createMailServerScreen.fxml'.";
         assert sendingPortTextfield != null : "fx:id=\"sendingPortTextfield\" was not injected: check your FXML file 'createMailServerScreen.fxml'.";
         assert sendingProtocolTextfield != null : "fx:id=\"sendingProtocolTextfield\" was not injected: check your FXML file 'createMailServerScreen.fxml'.";
         
+        sendingPortTextfield.setText("25");
         sendingProtocolTextfield.getItems().clear();
-        sendingProtocolTextfield.getItems().addAll(Protocol.SMTP);
+        sendingProtocolTextfield.getItems().addAll(Protocol.smtp);
+        sendingProtocolTextfield.setValue(Protocol.smtp);
         receivingProtocolTexfield.getItems().clear();
-        receivingProtocolTexfield.getItems().addAll(Protocol.POP3,Protocol.IMAP);
+        receivingProtocolTexfield.getItems().addAll(Protocol.pop3,Protocol.imap);
     }
     
 }

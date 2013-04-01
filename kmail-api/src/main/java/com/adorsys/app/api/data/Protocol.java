@@ -8,5 +8,5 @@ package com.adorsys.app.api.data;
  *
  */
 public enum Protocol {
-	POP3,SMTP,IMAP
+	pop3,smtp,imap
 }
