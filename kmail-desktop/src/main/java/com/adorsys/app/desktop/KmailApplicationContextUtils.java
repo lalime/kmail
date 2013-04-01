@@ -14,7 +14,6 @@ import com.adorsys.app.api.data.service.ApplicationUserMailDataService;
 import com.adorsys.app.api.data.service.MailAccountDataService;
 import com.adorsys.app.api.data.service.MailDataService;
 import com.adorsys.app.api.data.service.MailServerDataService;
-import com.adorsys.app.data.domain.ApplicationUser;
 
 /**
  * @author w2b
@@ -60,13 +59,6 @@ public class KmailApplicationContextUtils {
 				mailServerDataService = applicationContext.getBean(MailServerDataService.class);
 				kmailApplicatioinContexUtilsInited = true ;
 				
-
-				ApplicationUser applicationUser = new ApplicationUser();
-				applicationUser.setDefaultUser(true);
-				applicationUser.setPassword("test123");
-				applicationUser.setUserName("user0001");
-				applicationUserDataService.save(applicationUser);
-				System.out.println(applicationUserDataService.findByUserName("user0001").toString());
 			} catch (BeansException e) {
 				e.printStackTrace();
 			}catch (Exception e) {

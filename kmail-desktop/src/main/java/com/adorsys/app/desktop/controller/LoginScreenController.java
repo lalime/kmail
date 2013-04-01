@@ -25,11 +25,11 @@ public class LoginScreenController {
         String password = passwordField.getText();
 
         if (StringUtils.isEmpty(userName)) {
-        	//TODO : the user name is required
+        	messageLabel.setText("the user name is required");
         }
 
         if (StringUtils.isEmpty(password)) {
-            //TODO : The password is required;
+        	messageLabel.setText("The Passord Is Required");
         }
         if("kmail".equals(userName) && "test".equals(password)){
         	ViewManager.getViewManager().showHomepage();

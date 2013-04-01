@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 
+import com.adorsys.app.api.data.MailAccountModelRepresentation;
 import com.adorsys.app.api.data.MailModelRepresentation;
 import com.adorsys.app.api.mail.service.MailSender;
 
@@ -16,7 +17,11 @@ import com.adorsys.app.api.mail.service.MailSender;
  * 
  */
 public class HtmlMailSender implements MailSender {
-
+	private MailAccountModelRepresentation mailAccount;
+	
+	public HtmlMailSender(MailAccountModelRepresentation mailAccount) {
+		this.mailAccount = mailAccount;
+	}
 	@Override
 	public void sendMails(List<MailModelRepresentation> mails) {
 		if (mails == null || mails.isEmpty())
@@ -30,15 +35,14 @@ public class HtmlMailSender implements MailSender {
 	public void sendMail(MailModelRepresentation mail) {
 		// Create the email message
 		HtmlEmail email = new HtmlEmail();
-		email.setHostName("mail.myserver.com");
 		try {
-			email.setTo(mail.getAddressTo());
-
+			email.setHostName(mailAccount.getMailServer().getHostName());
+			for (String destinator : mail.getAddressTo()) {
+				email.addTo(destinator);
+			}
 			email.setFrom(mail.getAddressFrom(), null);
 			email.setSubject(mail.getSubject());
-			
-			// set the html message
-			email.setHtmlMsg(mail.getSubject());
+			email.setMsg(mail.getSubject());
 			// send the email
 			email.send();
 		} catch (EmailException e) {

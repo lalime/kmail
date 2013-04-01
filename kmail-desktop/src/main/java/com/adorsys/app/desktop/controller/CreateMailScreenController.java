@@ -28,7 +28,7 @@ import com.adorsys.app.data.domain.AppUserMail;
 import com.adorsys.app.data.domain.Mail;
 import com.adorsys.app.desktop.KmailApplicationContextUtils;
 import com.adorsys.app.desktop.ViewManager;
-import com.adorsys.app.service.SimpleMailSender;
+import com.adorsys.app.service.HtmlMailSender;
 
 
 public class CreateMailScreenController {
@@ -148,8 +148,8 @@ public class CreateMailScreenController {
     	}
     	
     	try{
-    		SimpleMailSender mailSender = new SimpleMailSender(mailAccount);
-    		mailSender.sendMail(mail);
+    		HtmlMailSender htmlMailSender = new HtmlMailSender(mailAccount);
+    		htmlMailSender.sendMail(mail);
     		if(isANewMail(mail)){
     			LOGGER.info("Saving a new Mail");
         		saveMail(mail, mailAccount);
@@ -167,11 +167,16 @@ public class CreateMailScreenController {
     }
 
 	private void saveMail(Mail mail, MailAccountModelRepresentation mailAccount) {
+		KmailApplicationContextUtils.getMailDataService().save(mail);
+		
 		AppUserMail appUserMail = new AppUserMail();
 		appUserMail.setApplicationUser(KmailApplicationContextUtils.getApplicationUser());
 		appUserMail.setMail(mail);
 		appUserMail.setMailAccount(mailAccount);
 		appUserMail.setViewState(ViewState.READED);
+		appUserMail.setEditionState(EditionState.SENDED);
+		appUserMail.setStoringDate(new Date());
+		appUserMail.setStoringTime(new Date().getTime());
 		KmailApplicationContextUtils.getAppUserMailDataService().save(appUserMail);
 	}
 
