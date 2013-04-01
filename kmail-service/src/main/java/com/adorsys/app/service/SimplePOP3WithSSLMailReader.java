@@ -52,10 +52,10 @@ public class SimplePOP3WithSSLMailReader implements MailReader{
         
         pop3Props.setProperty("mail.pop3.socketFactory.class", SSL_FACTORY);
         pop3Props.setProperty("mail.pop3.socketFactory.fallback", "false");
-        pop3Props.setProperty("mail.pop3.port",  this.mailAccount.getMailServer().getPort());
-        pop3Props.setProperty("mail.pop3.socketFactory.port", this.mailAccount.getMailServer().getPort());
+        pop3Props.setProperty("mail.pop3.port",  this.mailAccount.getMailServer().getReceivingPort());
+        pop3Props.setProperty("mail.pop3.socketFactory.port", this.mailAccount.getMailServer().getReceivingPort());
         
-        URLName url = new URLName("pop3", this.mailAccount.getMailServer().getPort(), new Integer(this.mailAccount.getMailServer().getPort()), "",
+        URLName url = new URLName("pop3", this.mailAccount.getMailServer().getReceivingPort(), new Integer(this.mailAccount.getMailServer().getReceivingPort()), "",
                 this.mailAccount.getUserName(), this.mailAccount.getPassword());
         
         session = Session.getInstance(pop3Props, null);

@@ -39,7 +39,7 @@ public class SimpleMailSender implements MailSender {
 		SimpleEmail simpleEmail = new SimpleEmail();
 		try {
 			simpleEmail.setHostName(this.mailAccount.getMailServer().getHostName());
-			simpleEmail.setSmtpPort(new Integer(this.mailAccount.getMailServer().getPort()));
+			simpleEmail.setSmtpPort(new Integer(this.mailAccount.getMailServer().getSendingPort()));
 			simpleEmail.setAuthenticator(new DefaultAuthenticator(this.mailAccount.getUserName(), this.mailAccount.getPassword()));
 			simpleEmail.setFrom(mail.getAddressFrom());
 			simpleEmail.setTo(mail.getAddressTo());

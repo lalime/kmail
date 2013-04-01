@@ -3,10 +3,9 @@
  */
 package com.adorsys.app.desktop.controller;
 
-import com.adorsys.app.api.data.MailModelRepresentation;
-import com.adorsys.app.api.data.MailServerModelRepresentation;
-
 import javafx.beans.property.SimpleStringProperty;
+
+import com.adorsys.app.api.data.MailServerModelRepresentation;
 
 /**
  * @author w2b

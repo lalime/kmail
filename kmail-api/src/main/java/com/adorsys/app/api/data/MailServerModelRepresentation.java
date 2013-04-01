@@ -9,16 +9,24 @@ package com.adorsys.app.api.data;
  */
 public interface MailServerModelRepresentation {
 
-	public String getPort() ;
-	
-	public void setPort(String port);
-	
 	public String getHostName();
 	
 	public void setHostName(String hostName);
-
-	public Protocol getProtocol();
 	
-	public void setProtocol(Protocol protocol);
+	public String getSendingPort() ;
+	
+	public void setSendingPort(String port);
+
+	public Protocol getSendingProtocol();
+	
+	public void setSendingProtocol(Protocol protocol);
+	
+	public String getReceivingPort() ;
+	
+	public void setReceivingPort(String port);
+
+	public Protocol getReceivingProtocol();
+	
+	public void setReceivingProtocol(Protocol protocol);
 	
 }

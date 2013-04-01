@@ -167,7 +167,10 @@ public class ViewManager {
 	public void showCreateMailAccountScreen(){
 		LOGGER.info("Create a new mail Account");
 		List<MailServerModelRepresentation> allMailServers = KmailApplicationContextUtils.getMailServerDataService().findAll();
-		if(allMailServers != null)viewManager.mailServerComboBox.getItems().addAll(allMailServers);
+		if(allMailServers != null){
+			viewManager.mailServerComboBox.getItems().clear();
+			viewManager.mailServerComboBox.getItems().addAll(allMailServers);
+		}
 		replaceMainScreenContain(viewManager.createMailAccountScreen);
 	}
 	public void showMailAccountList(List<MailAccountModelRepresentation> mailAccounts){
@@ -198,7 +201,7 @@ public class ViewManager {
 		Collection<TableServerModel> convertedData = new ArrayList<TableServerModel>();
 		for (MailServerModelRepresentation mailServerM : dataToConvert) {
 			MailServer mailServer = (MailServer) mailServerM;
-			convertedData.add(new TableServerModel(mailServer.getId(),mailServer.getProtocol().toString(), mailServer.getHostName(), mailServer.getPort()));
+			convertedData.add(new TableServerModel(mailServer.getId(),mailServer.getSendingProtocol().toString(), mailServer.getHostName(), mailServer.getSendingPort()));
 		}
 		return convertedData;
 	}
