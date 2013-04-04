@@ -36,4 +36,7 @@ public interface MailModelRepresentation {
 	
 	public void setBody(String body);
 	
+	public Date getReceivedDate();
+	
+	public void setReceivedDate(Date date);
 }

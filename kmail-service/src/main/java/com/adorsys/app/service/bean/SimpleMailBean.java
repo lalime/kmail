@@ -19,6 +19,8 @@ public class SimpleMailBean implements MailModelRepresentation{
 	private String contentType ;
 	
 	private String body ;
+	
+	private Date receivedDate ;
 
 	public String getAddressFrom() {
 		return addressFrom;
@@ -73,6 +75,14 @@ public class SimpleMailBean implements MailModelRepresentation{
 
 	public void setBody(String body) {
 		this.body = body ;
+	}
+
+	public Date getReceivedDate() {
+		return receivedDate;
+	}
+
+	public void setReceivedDate(Date receivedDate) {
+		this.receivedDate = receivedDate;
 	}
 	
 }

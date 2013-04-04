@@ -31,6 +31,8 @@ public class Mail extends AbstractPersistable<Long> implements MailModelRepresen
 	private String contentType ;
 	
 	private String body ;
+	
+	private Date receivedDate ;
 
 	public String getAddressFrom() {
 		return addressFrom;
@@ -89,6 +91,14 @@ public class Mail extends AbstractPersistable<Long> implements MailModelRepresen
 	@Override
 	public void setBody(String body) {
 		this.body = body;
+	}
+
+	public Date getReceivedDate() {
+		return receivedDate;
+	}
+
+	public void setReceivedDate(Date receivedDate) {
+		this.receivedDate = receivedDate;
 	}
 	
 }

@@ -16,6 +16,7 @@ import com.adorsys.app.api.data.MailAccountModelRepresentation;
 import com.adorsys.app.api.data.MailModelRepresentation;
 import com.adorsys.app.api.data.ViewState;
 import com.adorsys.app.data.domain.AppUserMail;
+import com.adorsys.app.data.domain.Mail;
 import com.adorsys.app.service.SimplePOP3WithSSLMailReader;
 
 public class MainApp extends Application {
@@ -37,7 +38,7 @@ public class MainApp extends Application {
 			@Override
 			public void run() {
 				try {
-					MainApp.readAndSaveMails();					
+//					MainApp.readAndSaveMails();					
 				} catch (Exception e) {
 					LOG.error("An Error Occured : "+e.getMessage(),e);
 				}
@@ -51,11 +52,13 @@ public class MainApp extends Application {
 			SimplePOP3WithSSLMailReader simplePOP3WithSSLMailReader = new SimplePOP3WithSSLMailReader(mailAccountModelRepresentation);
 			List<MailModelRepresentation> receivedMails = simplePOP3WithSSLMailReader.readMails();
 			for (MailModelRepresentation mailModelRepresentation : receivedMails) {
-				KmailApplicationContextUtils.getMailDataService().save(mailModelRepresentation);
+				LOG.info("Received Mails :  "+mailModelRepresentation);
+				MailModelRepresentation cloneMail = cloneMail(mailModelRepresentation);
+				KmailApplicationContextUtils.getMailDataService().save(cloneMail);
 				AppUserMail appUserMail = new AppUserMail();
 				appUserMail.setApplicationUser(KmailApplicationContextUtils.getApplicationUser());
 				appUserMail.setEditionState(EditionState.RECEIVED);
-				appUserMail.setMail(mailModelRepresentation);
+				appUserMail.setMail(cloneMail );
 				appUserMail.setMailAccount(mailAccountModelRepresentation);
 				appUserMail.setStoringDate(new Date());
 				appUserMail.setStoringTime(new Date().getTime());
@@ -64,5 +67,16 @@ public class MainApp extends Application {
 			}
 		}
 		LOG.debug("... finished");
+	}
+	private static MailModelRepresentation cloneMail(MailModelRepresentation mailModel){
+		Mail mail = new Mail();
+		mail.setAddressFrom(mailModel.getAddressFrom());
+		mail.setAddressTo(mailModel.getAddressTo());
+		mail.setBody(mailModel.getBody());
+		mail.setContentType(mailModel.getContentType());
+		mail.setReceivedDate(mailModel.getReceivedDate());
+		mail.setSendDate(mailModel.getSendDate());
+		mail.setSubject(mail.getSubject());
+		return mail ;
 	}
 }
