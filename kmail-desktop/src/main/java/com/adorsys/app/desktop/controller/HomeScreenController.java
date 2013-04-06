@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -26,6 +27,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.adorsys.app.api.data.ApplicationUserMailModelRepresentation;
+import com.adorsys.app.api.data.MailAccountModelRepresentation;
+import com.adorsys.app.api.data.MailServerModelRepresentation;
 import com.adorsys.app.desktop.KmailApplicationContextUtils;
 import com.adorsys.app.desktop.ViewManager;
 import com.adorsys.app.desktop.model.TableMailModel;
@@ -47,6 +50,12 @@ public class HomeScreenController {
 
     @FXML
     private Text kmailText;
+    
+    @FXML
+    private MenuItem listMailAccountMenuItem;
+
+    @FXML
+    private MenuItem listMailServersMenuItem;
     
     private TableColumn<TableMailModel, String> mailDateColumn;
 
@@ -92,7 +101,17 @@ public class HomeScreenController {
     @FXML
     private Label trashLabel;
     
+    @FXML
+    void onListMailAccountMenuItemActionPerformed(ActionEvent event) {
+    	List<MailAccountModelRepresentation> mailsAccounts = KmailApplicationContextUtils.getMailAccountDataService().findAll();
+    	ViewManager.getViewManager().showMailAccountList(mailsAccounts);
+    }
 
+    @FXML
+    void onListMailServersMenuItemActionPerformed(ActionEvent event) {
+    	List<MailServerModelRepresentation> mailServers = KmailApplicationContextUtils.getMailServerDataService().findAll();
+    	ViewManager.getViewManager().showMailServerList(mailServers);
+    }
 
     @FXML
     void onMailAccountMenuItemValidation(Event event) {
@@ -181,7 +200,9 @@ public class HomeScreenController {
         assert searchField != null : "fx:id=\"searchField\" was not injected: check your FXML file 'homeScreen.fxml'.";
         assert sendedMailLabel != null : "fx:id=\"sendedMailLabel\" was not injected: check your FXML file 'homeScreen.fxml'.";
         assert trashLabel != null : "fx:id=\"trashLabel\" was not injected: check your FXML file 'homeScreen.fxml'.";
-
+        assert listMailAccountMenuItem != null : "fx:id=\"listMailAccountMenuItem\" was not injected: check your FXML file 'homeScreen.fxml'.";
+        assert listMailServersMenuItem != null : "fx:id=\"listMailServersMenuItem\" was not injected: check your FXML file 'homeScreen.fxml'.";
+        
         initialReceivedMailLabelText = this.receivedMailLabel.getText();
         initialSendedMailLabelText = this.sendedMailLabel.getText();
         initialTrashMailLabelText = this.trashLabel.getText();

@@ -9,6 +9,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,6 +18,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -114,7 +117,7 @@ public class ViewManager {
 	
 	public void showMailList(List<ApplicationUserMailModelRepresentation> data){
 
-        TableView<TableMailModel> mailTableView = new TableView<TableMailModel>();
+        final TableView<TableMailModel> mailTableView = new TableView<TableMailModel>();
         
         TableColumn<TableMailModel, String> mailFromColumn = new  TableColumn<TableMailModel, String>("From");
         TableColumn<TableMailModel, String> mailSubjectColumn =  new TableColumn<TableMailModel, String>("Subject");
@@ -124,6 +127,14 @@ public class ViewManager {
 		mailSubjectColumn.setCellValueFactory(new PropertyValueFactory<TableMailModel, String>("subject"));
 		mailDateColumn.setCellValueFactory(new PropertyValueFactory<TableMailModel, String>("date"));
 		
+		EventHandler<Event> enventHandler =  new EventHandler<Event>() {
+			@Override
+			public void handle(Event arg0) {
+				TableMailModel selectedItem = mailTableView.getSelectionModel().getSelectedItem();
+				System.out.println("mouse clicked on the table : "+selectedItem.toString());
+			}
+		};
+		mailTableView.setOnMouseClicked( enventHandler);
 		mailTableView.getColumns().addAll(mailFromColumn,	mailSubjectColumn,mailDateColumn);
 		if(data == null || data.isEmpty()){
 			mailTableView.getItems().add(new TableMailModel("boris.waguia@adorsys.com", "welcome to kmail", new Date().toString()));			

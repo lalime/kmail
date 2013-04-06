@@ -38,7 +38,7 @@ public class MainApp extends Application {
 			@Override
 			public void run() {
 				try {
-//					MainApp.readAndSaveMails();					
+					MainApp.readAndSaveMails();					
 				} catch (Exception e) {
 					LOG.error("An Error Occured : "+e.getMessage(),e);
 				}

@@ -38,4 +38,10 @@ public class TableMailModel {
 	public void setDate(String date) {
 		this.date.set(date);
 	}
+	@Override
+	public String toString() {
+		return "TableMailModel [from=" + from + ", subject=" + subject
+				+ ", date=" + date + "]";
+	}
+	
 }

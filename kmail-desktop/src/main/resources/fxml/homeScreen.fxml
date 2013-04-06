@@ -35,6 +35,12 @@
           <items>
             <MenuItem mnemonicParsing="false" onAction="#onMailAccountMenuItemValidation" text="Mail Account" fx:id="mailAccountMenuItem" />
             <MenuItem mnemonicParsing="false" onAction="#onMailServerMenuItemValidation" text="Mail Server" fx:id="mailServerMenuItem" />
+            <Menu mnemonicParsing="false" text="List">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#onListMailAccountMenuItemActionPerformed" text="Mails Accounts" fx:id="listMailAccountMenuItem" />
+                <MenuItem mnemonicParsing="false" onAction="#onListMailServersMenuItemActionPerformed" text="Mails Servers" fx:id="listMailServersMenuItem" />
+              </items>
+            </Menu>
           </items>
         </Menu>
         <Menu mnemonicParsing="false" text="Help" fx:id="menuHelp">
