@@ -48,6 +48,7 @@ public class MainApp extends Application {
 	public static void readAndSaveMails(){
 		LOG.debug("quering mails ...");
 		List<MailAccountModelRepresentation> mailAccounts = KmailApplicationContextUtils.getMailAccountDataService().findAll();
+		int numberOfReceivedMails = 0;
 		for (MailAccountModelRepresentation mailAccountModelRepresentation : mailAccounts) {
 			SimplePOP3WithSSLMailReader simplePOP3WithSSLMailReader = new SimplePOP3WithSSLMailReader(mailAccountModelRepresentation);
 			List<MailModelRepresentation> receivedMails = simplePOP3WithSSLMailReader.readMails();
@@ -57,6 +58,7 @@ public class MainApp extends Application {
 				if(!KmailApplicationContextUtils.getMailDataService().isNewReceivedMail(mailModelRepresentation)){
 					continue;
 				}
+				
 				KmailApplicationContextUtils.getMailDataService().save(cloneMail);
 				AppUserMail appUserMail = new AppUserMail();
 				appUserMail.setApplicationUser(KmailApplicationContextUtils.getApplicationUser());
@@ -67,9 +69,10 @@ public class MainApp extends Application {
 				appUserMail.setStoringTime(new Date().getTime());
 				appUserMail.setViewState(ViewState.UN_READED);
 				KmailApplicationContextUtils.getAppUserMailDataService().save(appUserMail);
+				numberOfReceivedMails ++;
 			}
 		}
-		LOG.debug("... finished");
+		LOG.debug("... finished, "+numberOfReceivedMails+" received mails");
 	}
 	private static MailModelRepresentation cloneMail(MailModelRepresentation mailModel){
 		Mail mail = new Mail();
