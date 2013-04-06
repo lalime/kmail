@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.adorsys.app.api.data.MailModelRepresentation;
 import com.adorsys.app.api.data.MailServerModelRepresentation;
 import com.adorsys.app.api.data.service.MailServerDataService;
 import com.adorsys.app.data.domain.MailServer;

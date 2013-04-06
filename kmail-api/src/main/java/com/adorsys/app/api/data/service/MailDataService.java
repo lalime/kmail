@@ -17,4 +17,5 @@ public interface MailDataService {
 	public List<MailModelRepresentation> findAll();
 	public void delete(Long id);
 	public void delete(MailModelRepresentation mailModelRepresentation);
+	public boolean isNewReceivedMail(MailModelRepresentation mailModel);
 }

@@ -26,6 +26,7 @@ public class SimpleMailDataService implements MailDataService {
 
 	@Override
 	public Mail save(MailModelRepresentation mailModelRepresentation) {
+		
 		return mailDataService.save((Mail)mailModelRepresentation);
 	}
 
@@ -58,6 +59,12 @@ public class SimpleMailDataService implements MailDataService {
 			return ;
 		}
 		mailDataService.delete(mail);
+	}
+
+	@Override
+	public boolean isNewReceivedMail(MailModelRepresentation mailModel) {
+		List<MailModelRepresentation> receivedMails = mailDataService.findByAddressFromAndReceivedDate(mailModel.getAddressFrom(), mailModel.getReceivedDate());
+		return receivedMails.isEmpty();
 	}
 	
 }

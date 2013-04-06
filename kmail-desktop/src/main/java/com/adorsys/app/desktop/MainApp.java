@@ -54,6 +54,9 @@ public class MainApp extends Application {
 			for (MailModelRepresentation mailModelRepresentation : receivedMails) {
 				LOG.info("Received Mails :  "+mailModelRepresentation);
 				MailModelRepresentation cloneMail = cloneMail(mailModelRepresentation);
+				if(!KmailApplicationContextUtils.getMailDataService().isNewReceivedMail(mailModelRepresentation)){
+					continue;
+				}
 				KmailApplicationContextUtils.getMailDataService().save(cloneMail);
 				AppUserMail appUserMail = new AppUserMail();
 				appUserMail.setApplicationUser(KmailApplicationContextUtils.getApplicationUser());
