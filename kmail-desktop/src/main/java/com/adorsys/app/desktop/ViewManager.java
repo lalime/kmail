@@ -18,7 +18,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -40,7 +39,7 @@ import com.adorsys.app.desktop.model.TableServerModel;
 /**
  * @author w2b
  * I use this class, to centralize the management and the navigation among views.
- * I also, load resource, on startup, to avoid any surprising views issues at runtime.
+ * I also, load resource, on startup, to avoid any surprising issues at runtime.
  */
 public class ViewManager {
 	
